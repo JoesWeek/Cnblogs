@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Cnblogs.Droid/Resources/values/Strings1.xml
+/Cnblogs.Droid/Resources/values/Strings1.xml
