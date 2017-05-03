@@ -4,7 +4,7 @@
 
 ## 下载 ##
 
-[apk](com.android.cnblogs.apk)
+[Download](com.android.cnblogs.apk)
 
 ## 截图 ##
 
