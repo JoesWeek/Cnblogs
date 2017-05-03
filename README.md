@@ -8,7 +8,10 @@
 
 ## 截图 ##
 
-![demo](screenshots/demo.gif)
+![screenshots](screenshots/screenshots0.png)
+![screenshots](screenshots/screenshots1.png)
+![screenshots](screenshots/screenshots2.png)
+![screenshots](screenshots/screenshots3.png)
 
 ## 依赖 ##
 
