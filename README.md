@@ -1,10 +1,10 @@
 # Cnblogs
 
-[博客园](http://www.cnblogs.com/)博客园第三方Android客户端，Xamarin App，Material Design风格
+[博客园](http://www.cnblogs.com/)第三方Android客户端，Xamarin App，Material Design风格
 
 ## 下载 ##
 
-![apk](com.android.cnblogs.apk)
+[Download](com.android.cnblogs.apk)
 
 ## 截图 ##
 
