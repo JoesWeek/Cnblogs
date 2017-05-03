@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundGeneral">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="10dp">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imgUserUrl" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="5dp">
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/txtUserName"
+          android:textColor="@color/title_color"
+          android:textSize="12sp"
+          android:layout_alignParentLeft="true"
+          android:layout_marginBottom="5dp" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/txtPostdate"
+          android:textColor="@color/subtitle_color"
+          android:textSize="12sp"
+          android:layout_alignParentRight="true" />
+      <TextView
+          android:id="@+id/txtDian"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/subtitle_color"
+          android:textSize="12sp"
+          android:text="评论了："
+          android:layout_below="@+id/txtUserName" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/txtContent"
+          android:textSize="14sp"
+          android:textColor="@color/title_color"
+          android:layout_marginTop="10dp"
+          android:layout_marginBottom="5dp"
+          android:layout_below="@+id/txtDian" />
+      <LinearLayout
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical|right"
+          android:layout_marginRight="5dp"
+          android:layout_below="@+id/txtContent">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleSmall"
+            android:visibility="gone" />
+        <ImageButton
+            android:id="@+id/imgDelete"
+            android:background="@drawable/delete_18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+        <ImageButton
+            android:id="@+id/imgComment"
+            android:background="@drawable/comments_18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone" />
+      </LinearLayout>
+    </RelativeLayout>
+  </LinearLayout>
+  <View style="@style/LineStyle" />
+</LinearLayout>

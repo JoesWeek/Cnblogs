@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/primary</item>
+    <item name="android:windowBackground">@color/background</item>
+    <item name="selectableItemBackgroundGeneral">@drawable/selectable_item_background_general</item>
+  </style>
+  <style name="AppTheme" parent="@style/BaseAppTheme">
+    <item name="android:windowTranslucentStatus">true</item>
+  </style>
+  <style name="SplashTheme" parent="@style/BaseAppTheme">
+  </style>
+  <style name="PhotoTheme" parent="@style/BaseAppTheme">
+    <item name="colorPrimaryDark">@color/dark</item>
+  </style>
+  <style name="CheckBoxTheme" parent="@style/BaseAppTheme">
+    <item name="colorAccent">@color/primary</item>
+  </style>
+  <style name="SwitchTheme" parent="@style/BaseAppTheme">
+    <item name="colorAccent">@color/primary</item>
+  </style>
+  <style name="LaunchStyle" parent="AppTheme">
+    <item name="android:windowBackground">@drawable/shape_launch</item>
+  </style>
+  <style name="LineStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">1dip</item>
+    <item name="android:background">@color/gainsboro</item>
+  </style>
+
+</resources>

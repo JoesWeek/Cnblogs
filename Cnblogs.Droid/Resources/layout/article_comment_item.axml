@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundGeneral">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="10dp">
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content">
+      <ImageView
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:id="@+id/avatar" />
+      <TextView
+          android:id="@+id/floor"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/subtitle_color"
+          android:textSize="12sp"
+          android:layout_marginTop="5dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent">
+      <RelativeLayout
+          android:id="@+id/relativeLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/createAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/subtitle_color"
+            android:textSize="12sp"
+            android:layout_alignParentRight="true" />
+      </RelativeLayout>
+      <TextView
+          android:id="@+id/body"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@color/title_color"
+          android:textSize="14sp"
+          android:lineSpacingExtra="5dp"
+          android:layout_marginTop="5dp"
+          android:layout_marginBottom="5dp" />
+    </LinearLayout>
+  </LinearLayout>
+  <View style="@style/LineStyle" />
+</LinearLayout>

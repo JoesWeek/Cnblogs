@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string-array name="ArticlesTabs">
+    <item>@string/articlehome</item>
+    <item>@string/articleHot</item>
+  </string-array>
+  <string-array name="NewsTabs">
+    <item>@string/newshome</item>
+    <item>@string/newsrecommend</item>
+    <item>@string/newsworkhot</item>
+  </string-array>
+  <string-array name="StatusesTabs">
+    <item>@string/statuses_all</item>
+    <item>@string/statuses_following</item>
+    <item>@string/statuses_my</item>
+    <item>@string/statuses_mycomment</item>
+    <item>@string/statuses_recentcomment</item>
+    <item>@string/statuses_mention</item>
+    <item>@string/statuses_comment</item>
+  </string-array>
+  <string-array name="QuestionsTabs">
+    <item>@string/question_none</item>
+    <item>@string/question_highscore</item>
+    <item>@string/question_noanswer</item>
+    <item>@string/question_solved</item>
+    <item>@string/question_myquestion</item>
+  </string-array>
+</resources>

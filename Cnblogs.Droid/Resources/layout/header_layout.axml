@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@drawable/main_nav_header_bg"
+    android:padding="10dp"
+    android:gravity="bottom">
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/headerAvatar" />
+    <TextView
+        android:id="@+id/headerAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:text="@string/need_login"
+        android:layout_below="@+id/headerAvatar" />
+    <TextView
+        android:id="@+id/headerSeniority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gainsboro"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/headerAuthor" />
+    <TextView
+        android:id="@+id/headerLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary"
+        android:textSize="12sp"
+        android:layout_margin="5dp"
+        android:layout_alignParentRight="true"
+        android:text="@string/logout"
+        android:layout_alignBottom="@id/headerSeniority" />
+</RelativeLayout>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item android:id="@+id/send"
+	      android:title="发布"
+	      android:icon="@drawable/send_24dp"
+	      app:showAsAction="always"/>
+</menu>

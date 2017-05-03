@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_anchor="@id/swipeRefreshLayout"
+    app:layout_anchorGravity="bottom"
+    app:layout_behavior="Cnblogs.Droid.UI.Behaviors.BottomBehavior">
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/bottom_container">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/bottom_top_shadow" />
+  </FrameLayout>
+  <FrameLayout
+      android:id="@+id/bottom_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:padding="5dp">
+      <EditText
+          android:id="@+id/txtContent"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:textColor="@color/subtitle_color"
+          android:textSize="12sp"
+          android:layout_weight="1"
+          android:background="@drawable/line"
+          android:textCursorDrawable="@drawable/color_cursor"
+          android:hint="@string/comment_tip"/>
+      <FrameLayout
+          android:layout_width="45dp"
+          android:layout_height="30dp"
+          android:layout_weight="0"
+          android:layout_marginLeft="5dp">
+        <ProgressBar
+            android:id="@+id/proLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/btnComment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="12sp"
+            android:textColor="@color/bottom_comment"
+            android:text="@string/send"
+            android:gravity="center"
+            android:background="@drawable/bottom_comment"
+            android:clickable="true" />
+      </FrameLayout>
+    </LinearLayout>
+  </FrameLayout>
+</LinearLayout>

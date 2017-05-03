@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/selectableItemBackgroundGeneral">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="10dp">
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content">
+      <ImageView
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:id="@+id/faceUrl" />
+      <TextView
+          android:id="@+id/floor"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/subtitle_color"
+          android:textSize="12sp"
+          android:layout_marginTop="5dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent">
+      <RelativeLayout
+          android:id="@+id/relativeLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/dateAdded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/subtitle_color"
+            android:textSize="12sp"
+            android:layout_alignParentRight="true" />
+      </RelativeLayout>
+      <TextView
+          android:id="@+id/comment"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColor="@color/title_color"
+          android:textSize="14sp"
+          android:lineSpacingExtra="5dp"
+          android:layout_marginTop="5dp"
+          android:layout_marginBottom="5dp" />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical|right">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_marginRight="10dp"
+            android:visibility="gone" />
+        <ImageButton
+            android:id="@+id/imgDelete"
+            android:background="@drawable/delete_18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:visibility="gone" />
+        <ImageButton
+            android:id="@+id/imgEdit"
+            android:background="@drawable/edit_18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/agreeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/subtitle_color"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/agree_18dp" />
+        <TextView
+            android:id="@+id/antiCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/subtitle_color"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/anti_18dp" />
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
+  <View style="@style/LineStyle" />
+</LinearLayout>

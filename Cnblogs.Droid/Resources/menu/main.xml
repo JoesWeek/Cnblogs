@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/blog_24dp"
+        android:checked="true"
+        android:title="@string/bolgs"/>
+    <item
+        android:id="@+id/NewsItems"
+        android:icon="@drawable/news_24dp"
+        android:title="@string/news"/>
+    <item
+        android:id="@+id/bookmarks"
+        android:icon="@drawable/bookmarks_24dp"
+        android:title="@string/bookmarks"/>
+    <item
+        android:id="@+id/KbArticles"
+        android:icon="@drawable/kbarticles_24dp"
+        android:title="@string/kbArticles"/>
+    <item
+        android:id="@+id/Statuses"
+        android:icon="@drawable/statuses_24dp"
+        android:title="@string/statuses"/>
+    <item
+        android:id="@+id/Question"
+        android:icon="@drawable/question_24dp"
+        android:title="@string/question"/>
+  </group>
+    <item
+            android:title="@string/about">
+      <menu>
+        <item
+            android:id="@+id/Setting"
+            android:icon="@drawable/setting_24dp"
+            android:title="@string/setting"/>
+      </menu>
+    </item>
+</menu>
