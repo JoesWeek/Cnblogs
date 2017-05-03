@@ -113,7 +113,7 @@
   <string name="reload">重新加载</string>
   <string name="load_end">没有更多内容</string>
   <string name="load_nodata">还没有内容</string>
-
+  <!--需要申请开通open api调用权限，获取ClientId和ClientSercret-->
   <string name="ClientId"></string>
   <string name="ClientSercret"></string>
   <string name="PublicKey"></string>
