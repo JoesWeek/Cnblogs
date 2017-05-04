@@ -41,10 +41,10 @@ namespace Cnblogs.Droid.UI.Activitys
             {
                 Intent intent = new Intent(Intent.ActionSendto);
                 intent.AddFlags(ActivityFlags.NewTask);
-                intent.SetData(Android.Net.Uri.Parse("mailto:476920650@qq.com"));
+                intent.SetData(Android.Net.Uri.Parse("mailto:" + Resources.GetString(Resource.String.survey_email)));
                 if (intent.ResolveActivity(this.PackageManager) != null)
                 {
-                    intent.PutExtra(Intent.ExtraSubject, "来自 Cnblogs.Android-" + packageInfo.VersionName + " 的反馈意见");
+                    intent.PutExtra(Intent.ExtraSubject, "来自 " + packageInfo.PackageName + " - " + packageInfo.VersionName + " 的反馈意见");
                     intent.PutExtra(Intent.ExtraText, "设备信息：Android " + Build.VERSION.Release + " - " + Build.Manufacturer + " - " + Build.Model + "\n（如果涉及隐私请手动删除这个内容）\n\n");
                     StartActivity(intent);
                 }
@@ -52,6 +52,13 @@ namespace Cnblogs.Droid.UI.Activitys
                 {
                     Toast.MakeText(this, "系统中没有安装邮件客户端", ToastLength.Short).Show();
                 }
+            };
+            FindViewById<LinearLayout>(Resource.Id.layoutOpenSourceUrl).Click += (object sender, EventArgs e) =>
+            {
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Resources.GetString(Resource.String.open_source_url)));
+                intent.SetClassName("com.android.browser", "com.android.browser.BrowserActivity");
+                intent.AddFlags(ActivityFlags.NewTask);
+                StartActivity(intent);
             };
         }
 
