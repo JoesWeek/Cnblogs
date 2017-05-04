@@ -2,6 +2,10 @@
 
 [博客园](http://www.cnblogs.com/)第三方Android客户端，Xamarin App，Material Design风格
 
+# AccessToken
+
+博客园Open Api需要申请调用权限，Open Api基于OAuth进行验证
+
 ## 下载
 
 [Download](com.android.cnblogs.apk)
