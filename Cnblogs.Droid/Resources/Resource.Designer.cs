@@ -4034,17 +4034,17 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c002a
 			public const int ApplicationName = 2131492906;
 			
-			// aapt resource value: 0x7f0c00c6
-			public const int ClientId = 2131493062;
+			// aapt resource value: 0x7f0c00c8
+			public const int ClientId = 2131493064;
 			
-			// aapt resource value: 0x7f0c00c7
-			public const int ClientSercret = 2131493063;
+			// aapt resource value: 0x7f0c00c9
+			public const int ClientSercret = 2131493065;
 			
 			// aapt resource value: 0x7f0c0029
 			public const int Hello = 2131492905;
 			
-			// aapt resource value: 0x7f0c00c8
-			public const int PublicKey = 2131493064;
+			// aapt resource value: 0x7f0c00ca
+			public const int PublicKey = 2131493066;
 			
 			// aapt resource value: 0x7f0c0008
 			public const int abc_action_bar_home_description = 2131492872;
@@ -4229,6 +4229,9 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c0002
 			public const int character_counter_pattern = 2131492866;
 			
+			// aapt resource value: 0x7f0c00c5
+			public const int client_error = 2131493061;
+			
 			// aapt resource value: 0x7f0c00a9
 			public const int comment = 2131493033;
 			
@@ -4358,6 +4361,9 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c00bd
 			public const int press_back_again_to_exit = 2131493053;
 			
+			// aapt resource value: 0x7f0c00c6
+			public const int publicKey_error = 2131493062;
+			
 			// aapt resource value: 0x7f0c008c
 			public const int question = 2131493004;
 			
@@ -4469,8 +4475,8 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c00a3
 			public const int survey = 2131493027;
 			
-			// aapt resource value: 0x7f0c00c5
-			public const int survey_email = 2131493061;
+			// aapt resource value: 0x7f0c00c7
+			public const int survey_email = 2131493063;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int umeng_example_home_btn_plus = 2131492924;

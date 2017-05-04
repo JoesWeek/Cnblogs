@@ -66,9 +66,15 @@ namespace Cnblogs.Droid.UI.Activitys
                         Toast.MakeText(this, Resources.GetString(Resource.String.need_password), ToastLength.Short).Show();
                         return;
                     }
+                    var publicKey = Resources.GetString(Resource.String.PublicKey);
+                    if (publicKey == "")
+                    {
+                        Toast.MakeText(this, Resources.GetString(Resource.String.publicKey_error), ToastLength.Short).Show();
+                        return;
+                    }
+                    RSAUtils rsaUtils = new RSAUtils(publicKey);
                     dialog.SetMessage(Resources.GetString(Resource.String.logining));
                     dialog.Show();
-                    RSAUtils rsaUtils = new RSAUtils(Resources.GetString(Resource.String.PublicKey));
 
                     var basic = Square.OkHttp3.Credentials.Basic(Resources.GetString(Resource.String.ClientId), Resources.GetString(Resource.String.ClientSercret));
 

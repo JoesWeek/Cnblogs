@@ -16,7 +16,8 @@ namespace Cnblogs.Droid.UI.Activitys
     public class SplashActivity : BaseActivity, ISplashView
     {
         private ISplashPresenter splashPresenter;
-        private Handler handler;
+        private string ClientId;
+        private string ClientSercret;
         protected override int LayoutResource => Resource.Layout.splash;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -24,30 +25,38 @@ namespace Cnblogs.Droid.UI.Activitys
             base.OnCreate(savedInstanceState);
             SetTheme(Resource.Style.AppTheme);
             splashPresenter = new SplashPresenter(this);
-            handler = new Handler();
+            ClientId = Resources.GetString(Resource.String.ClientId);
+            ClientSercret = Resources.GetString(Resource.String.ClientSercret);
+            if (ClientId == "" || ClientSercret == "")
+            {
+                Toast.MakeText(this, Resources.GetString(Resource.String.client_error), ToastLength.Long).Show();
+            }
         }
         protected override async void OnResume()
         {
             base.OnResume();
-            var token = TokenShared.GetAccessToken(this);
-            if (token.access_token == "" || token.RefreshTime.AddSeconds(token.expires_in) < DateTime.Now)
+            if (ClientId != "" && ClientSercret != "")
             {
-                var basic = Square.OkHttp3.Credentials.Basic(Resources.GetString(Resource.String.ClientId), Resources.GetString(Resource.String.ClientSercret));
-                splashPresenter.GetAccessToken(TokenShared.GetAccessToken(this), basic);
-            }
-            else
-            {
-                var user = UserShared.GetAccessToken(this);
-                if (user.access_token != "" && user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
+                var token = TokenShared.GetAccessToken(this);
+                if (token.access_token == "" || token.RefreshTime.AddSeconds(token.expires_in) < DateTime.Now)
                 {
-                    Toast.MakeText(this, Resources.GetString(Resource.String.access_token_out_of_date), ToastLength.Long).Show();
+                    var basic = Square.OkHttp3.Credentials.Basic(Resources.GetString(Resource.String.ClientId), Resources.GetString(Resource.String.ClientSercret));
+                    splashPresenter.GetAccessToken(TokenShared.GetAccessToken(this), basic);
                 }
-                if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
+                else
                 {
-                    UserShared.Update(this, new AccessToken());
-                    await SQLiteUtils.Instance().DeleteUserAll();
+                    var user = UserShared.GetAccessToken(this);
+                    if (user.access_token != "" && user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
+                    {
+                        Toast.MakeText(this, Resources.GetString(Resource.String.access_token_out_of_date), ToastLength.Long).Show();
+                    }
+                    if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
+                    {
+                        UserShared.Update(this, new AccessToken());
+                        await SQLiteUtils.Instance().DeleteUserAll();
+                    }
+                    StartMain();
                 }
-                StartMain();
             }
         }
         public void GetAccessTokenFail(string msg)

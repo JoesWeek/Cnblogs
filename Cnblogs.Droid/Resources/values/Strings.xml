@@ -116,6 +116,9 @@
   <string name="load_end">没有更多内容</string>
   <string name="load_nodata">还没有内容</string>
   
+  <string name="client_error">未设置ClientId或ClientSercret</string>
+  <string name="publicKey_error">未设置PublicKey</string>
+  
   <!--需要申请开通open api调用权限，获取ClientId和ClientSercret-->
   <string name="survey_email"></string>
   <string name="ClientId"></string>
