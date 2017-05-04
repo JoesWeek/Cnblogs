@@ -29,6 +29,7 @@ namespace Cnblogs.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+            OkHttpUtils.Context = this;
             SQLiteUtils.Instance();
 
             PlatformConfig.SetWeixin("wxcf8f642a8aa4c630", "76ebc29b4194164aee32eedff2e17900");

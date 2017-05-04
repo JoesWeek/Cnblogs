@@ -8,12 +8,16 @@ using Cnblogs.Droid.Model;
 using System.Text;
 using System.Security.Authentication;
 using System.Net.Http;
+using Com.Umeng.Socialize.Utils;
+using Com.Umeng.Analytics;
+using Android.Content;
 
 namespace Cnblogs.Droid.Utils
 {
     public class OkHttpUtils
     {
         private OkHttpClient okHttpClient;
+        public static Context Context { get; set; }
 
         public OkHttpUtils(AccessToken token)
         {
@@ -35,17 +39,21 @@ namespace Cnblogs.Droid.Utils
             Response response = await okHttpClient.NewCall(request).ExecuteAsync();
             var body = await response.Body().StringAsync();
             var code = response.Code();
-            switch (response.Code())
+            switch (code)
             {
                 case (int)System.Net.HttpStatusCode.OK:
                     return new ResultMessage() { IsError = false, Message = body };
                 case (int)System.Net.HttpStatusCode.NotFound:
+                    MobclickAgent.ReportError(Context, body);
                     return new ResultMessage() { IsError = true, Message = "404 NotFound" };
                 case (int)System.Net.HttpStatusCode.Unauthorized:
+                    MobclickAgent.ReportError(Context, body);
                     return new ResultMessage() { IsError = true, Message = "401 Unauthorized" };
                 case (int)System.Net.HttpStatusCode.InternalServerError:
+                    MobclickAgent.ReportError(Context, body);
                     return new ResultMessage() { IsError = true, Message = "内部服务器错误" };
                 default:
+                    MobclickAgent.ReportError(Context, body);
                     return new ResultMessage() { IsError = true, Message = "网络链接不可用 ,请稍后再试" };
             }
         }
