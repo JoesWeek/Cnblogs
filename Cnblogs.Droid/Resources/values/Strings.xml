@@ -2,7 +2,6 @@
 <resources>
   <string name="AppName">博客园</string>
   <string name="AppTitle">—  代码改变世界  —</string>
-  <string name="survey_email"></string>
   <string name="open_source_url">https://github.com/JoesWeek/Cnblogs</string>
   <string name="about_copyright">Copyright © 2017 JoesWeek</string>
   <string name="aboutCnblogs">博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。</string>
@@ -118,6 +117,7 @@
   <string name="load_nodata">还没有内容</string>
   
   <!--需要申请开通open api调用权限，获取ClientId和ClientSercret-->
+  <string name="survey_email"></string>
   <string name="ClientId"></string>
   <string name="ClientSercret"></string>
   <string name="PublicKey"></string>
