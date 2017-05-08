@@ -13,6 +13,7 @@ using Cnblogs.Droid.UI.Shareds;
 using Cnblogs.Droid.UI.Views;
 using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
+using Com.Umeng.Analytics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,47 +61,57 @@ namespace Cnblogs.Droid.UI.Fragments
         public override async void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
-            this.HasOptionsMenu = true;
-            swipeRefreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout);
-            swipeRefreshLayout.SetColorSchemeResources(Resource.Color.primary);
-            swipeRefreshLayout.SetOnRefreshListener(this);
+            try
+            {
+                this.HasOptionsMenu = true;
+                swipeRefreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout);
+                swipeRefreshLayout.SetColorSchemeResources(Resource.Color.primary);
+                swipeRefreshLayout.SetOnRefreshListener(this);
 
-            recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
-            var manager = new LinearLayoutManager(this.Activity);
-            recyclerView.SetLayoutManager(manager);
+                recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recyclerView);
+                var manager = new LinearLayoutManager(this.Activity);
+                recyclerView.SetLayoutManager(manager);
 
-            adapter = new StatusAdapter();
-            adapter.SetOnLoadMoreListener(this);
-            adapter.OnDeleteClickListener = this;
-            adapter.User = await SQLiteUtils.Instance().QueryUser();
-            recyclerView.SetAdapter(adapter);
+                adapter = new StatusAdapter();
+                adapter.SetOnLoadMoreListener(this);
+                adapter.OnDeleteClickListener = this;
+                adapter.User = await SQLiteUtils.Instance().QueryUser();
+                recyclerView.SetAdapter(adapter);
 
-            nologinView = this.Activity.LayoutInflater.Inflate(Resource.Layout.nologin_view, (ViewGroup)recyclerView.Parent, false);
-            nologinView.Click += delegate (object sender, EventArgs e)
-            {
-                StartActivityForResult(new Intent(this.Activity, typeof(LoginActivity)), (int)RequestCode.LoginCode);
-            };
-            notDataView = this.Activity.LayoutInflater.Inflate(Resource.Layout.empty_view, (ViewGroup)recyclerView.Parent, false);
-            notDataView.Click += delegate (object sender, EventArgs e)
-            {
-                OnRefresh();
-            };
-            errorView = this.Activity.LayoutInflater.Inflate(Resource.Layout.error_view, (ViewGroup)recyclerView.Parent, false);
-            errorView.Click += delegate (object sender, EventArgs e)
-            {
-                OnRefresh();
-            };
-            recyclerView.Post(async () =>
-            {
-                if (position > 0)
+                nologinView = this.Activity.LayoutInflater.Inflate(Resource.Layout.nologin_view, (ViewGroup)recyclerView.Parent, false);
+                nologinView.Click += delegate (object sender, EventArgs e)
                 {
-                    if (await ChenkLogin())
+                    StartActivityForResult(new Intent(this.Activity, typeof(LoginActivity)), (int)RequestCode.LoginCode);
+                };
+                notDataView = this.Activity.LayoutInflater.Inflate(Resource.Layout.empty_view, (ViewGroup)recyclerView.Parent, false);
+                notDataView.Click += delegate (object sender, EventArgs e)
+                {
+                    OnRefresh();
+                };
+                errorView = this.Activity.LayoutInflater.Inflate(Resource.Layout.error_view, (ViewGroup)recyclerView.Parent, false);
+                errorView.Click += delegate (object sender, EventArgs e)
+                {
+                    OnRefresh();
+                };
+                recyclerView.Post(async () =>
+                {
+                    if (position == 0)
                     {
-                        return;
+                        await statusesPresenter.GetClientStatus();
                     }
-                }
-                await statusesPresenter.GetClientStatus(position);
-            });
+                    else if (!LoginUtils.Instance(this.Activity).GetLoginStatus())
+                    {
+                        recyclerView.Post(() =>
+                        {
+                            adapter.SetEmptyView(nologinView);
+                        });
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MobclickAgent.ReportError(Context, ex.Message + ex.StackTrace);
+            }
         }
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
         {
@@ -109,66 +120,63 @@ namespace Cnblogs.Droid.UI.Fragments
                 inflater.Inflate(Resource.Menu.addstatus, menu);
             }
         }
-
         public override void OnResume()
         {
             base.OnResume();
-            NeedRefresh();
+            OnRefresh(false);
         }
-        public async void NeedRefresh()
+        public void OnRefresh()
         {
-            if (position > 0)
-            {
-                if (await ChenkLogin())
-                {
-                    return;
-                }
-            }
-            if (refreshTime.AddMinutes(15) < DateTime.Now)
-            {
-                OnRefresh();
-            }
+            OnRefresh(true);
         }
-        public async void OnRefresh()
+        public void OnRefresh(bool isRefresh)
         {
-            if (position > 0)
+            if (position == 0)
             {
-                swipeRefreshLayout.Enabled = false;
-                if (await ChenkLogin())
+                if (isRefresh)
                 {
-                    return;
+                    GetServiceData();
                 }
-                else
+                else if (refreshTime.AddMinutes(15) < DateTime.Now)
                 {
-                    swipeRefreshLayout.Enabled = true;
+                    //获取数据
+                    GetServiceData();
                 }
             }
             else
             {
-                swipeRefreshLayout.Enabled = true;
+                if (LoginUtils.Instance(this.Activity).GetLoginStatus())
+                {
+                    if (isRefresh)
+                    {
+                        GetServiceData();
+                    }
+                    else if (refreshTime.AddMinutes(15) < DateTime.Now)
+                    {
+                        //获取数据
+                        GetServiceData();
+                    }
+                }
+                else
+                {
+                    swipeRefreshLayout.Refreshing = false;
+
+                    recyclerView.Post(async () =>
+                    {
+                        adapter.User = await SQLiteUtils.Instance().QueryUser();
+                        adapter.SetNewData(new List<StatusModel>());
+                        adapter.SetEmptyView(nologinView);
+                    });
+                }
             }
+        }
+        public async void GetServiceData()
+        {
             if (pageIndex > 1)
                 pageIndex = 1;
             swipeRefreshLayout.Refreshing = true;
 
             await statusesPresenter.GetServiceStatus(position > 0 ? UserShared.GetAccessToken(this.Activity) : TokenShared.GetAccessToken(this.Activity), position, pageIndex);
-        }
-        public async Task<bool> ChenkLogin()
-        {
-            var user = UserShared.GetAccessToken(this.Activity);
-            if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
-            {
-                //未登录或清空Token失效
-                //清空Token
-                UserShared.Update(this.Activity, new AccessToken());
-                await SQLiteUtils.Instance().DeleteUserAll();
-                recyclerView.Post(() =>
-                {
-                    adapter.SetEmptyView(nologinView);
-                });
-                return true;
-            }
-            return false;
         }
         public void GetServiceStatusFail(string msg)
         {
@@ -219,12 +227,12 @@ namespace Cnblogs.Droid.UI.Fragments
                             adapter.SetEnableLoadMore(true);
                             pageIndex++;
                         }
-                        refreshTime = DateTime.Now;
                     }
                     else if (adapter.GetData().Count() == 0)
                     {
                         adapter.SetEmptyView(notDataView);
                     }
+                    refreshTime = DateTime.Now;
                 }
                 else
                 {
@@ -269,7 +277,6 @@ namespace Cnblogs.Droid.UI.Fragments
             else
             {
                 adapter.User = await SQLiteUtils.Instance().QueryUser();
-                NeedRefresh();
             }
             this.Activity.InvalidateOptionsMenu();
         }

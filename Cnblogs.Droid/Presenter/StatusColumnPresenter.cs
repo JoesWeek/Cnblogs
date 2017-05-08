@@ -77,18 +77,9 @@ namespace Cnblogs.Droid.Presenter
                 statusView.GetServiceStatusFail(ex.Message);
             }
         }
-        public async Task GetClientStatus(int position)
+        public async Task GetClientStatus()
         {
-            List<StatusModel> list = new List<StatusModel>();
-            switch (position)
-            {
-                case 0:
-                    list = await SQLiteUtils.Instance().QueryStatuses(pageSize);
-                    break;
-                case 1:
-                    break;
-            }
-            statusView.GetClientStatusSuccess(list);
+            statusView.GetClientStatusSuccess(await SQLiteUtils.Instance().QueryStatuses(pageSize));
         }
         public void DeleteStatus(AccessToken token, int id)
         {

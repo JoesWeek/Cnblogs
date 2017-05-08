@@ -36,7 +36,7 @@ namespace Cnblogs.Droid.UI.Adapters
         public void OnRefresh(int position)
         {
             if (columnFragmentList.Count > 0)
-                columnFragmentList[position].NeedRefresh();
+                columnFragmentList[position].Refresh();
         }
     }
 }

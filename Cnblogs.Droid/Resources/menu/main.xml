@@ -34,6 +34,10 @@
             android:id="@+id/Setting"
             android:icon="@drawable/setting_24dp"
             android:title="@string/setting"/>
+        <item
+            android:id="@+id/Share"
+            android:icon="@drawable/share_24dp"
+            android:title="@string/share"/>
       </menu>
     </item>
 </menu>

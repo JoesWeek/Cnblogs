@@ -34,7 +34,6 @@ namespace Cnblogs.Droid.UI.Fragments
         private View errorView;
         private View notloginView;
         private int pageIndex = 1;
-        private bool notlogin = false;
         private DateTime refreshTime;
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -80,13 +79,16 @@ namespace Cnblogs.Droid.UI.Fragments
             };
             recyclerView.Post(async () =>
             {
-                if (await ChenkLogin())
+                if (LoginUtils.Instance(this.Activity).GetLoginStatus())
                 {
-                    return;
+                    await bookmarksPresenter.GetClientBookmarks();
                 }
                 else
                 {
-                    await bookmarksPresenter.GetClientBookmarks();
+                    recyclerView.Post(() =>
+                    {
+                        adapter.SetEmptyView(notloginView);
+                    });
                 }
             });
         }
@@ -97,56 +99,35 @@ namespace Cnblogs.Droid.UI.Fragments
         public override void OnResume()
         {
             base.OnResume();
-            NeedRefresh();
+            OnRefresh();
         }
-        public async void NeedRefresh()
+        public void OnRefresh()
         {
-            if (await ChenkLogin())
+            if (LoginUtils.Instance(this.Activity).GetLoginStatus())
             {
-                return;
+                GetServiceData();
             }
             else
             {
-                if (!notlogin && refreshTime.AddMinutes(15) < DateTime.Now)
+                swipeRefreshLayout.Refreshing = false;
+
+                recyclerView.Post(() =>
                 {
-                    OnRefresh();
-                }
+                    adapter.SetNewData(new List<BookmarksModel>());
+                    adapter.SetEmptyView(notloginView);
+                });
             }
         }
-        public async void OnRefresh()
+        public async void GetServiceData()
         {
-            if (await ChenkLogin())
-            {
-                return;
-            }
-            else
-            {
-                if (pageIndex > 1)
-                    pageIndex = 1;
-                swipeRefreshLayout.Refreshing = true;
-                await bookmarksPresenter.GetServiceBookmarks(UserShared.GetAccessToken(this.Activity), pageIndex);
-            }
+            if (pageIndex > 1)
+                pageIndex = 1;
+            swipeRefreshLayout.Refreshing = true;
+            await bookmarksPresenter.GetServiceBookmarks(UserShared.GetAccessToken(this.Activity), pageIndex);
         }
         public async void OnLoadMoreRequested()
         {
             await bookmarksPresenter.GetServiceBookmarks(UserShared.GetAccessToken(this.Activity), pageIndex);
-        }
-        public async Task<bool> ChenkLogin()
-        {
-            var user = UserShared.GetAccessToken(this.Activity);
-            if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
-            {
-                //未登录或清空Token失效
-                //清空Token
-                UserShared.Update(this.Activity, new AccessToken());
-                await SQLiteUtils.Instance().DeleteUserAll();
-                recyclerView.Post(() =>
-                {
-                    adapter.SetEmptyView(notloginView);
-                });
-                return notlogin = true;
-            }
-            return notlogin = false;
         }
         public void GetServiceBookmarksFail(string msg)
         {
@@ -238,10 +219,6 @@ namespace Cnblogs.Droid.UI.Fragments
                 {
                     swipeRefreshLayout.Refreshing = false;
                 }
-            }
-            else
-            {
-                NeedRefresh();
             }
             this.Activity.InvalidateOptionsMenu();
         }

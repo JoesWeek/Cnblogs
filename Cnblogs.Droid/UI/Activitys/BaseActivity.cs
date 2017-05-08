@@ -13,9 +13,6 @@ namespace Cnblogs.Droid.UI.Activitys
             base.OnCreate(savedInstanceState);
             SetContentView(LayoutResource);
 
-            MobclickAgent.SetDebugMode(true);
-            MobclickAgent.OpenActivityDurationTrack(false);
-            MobclickAgent.SetScenarioType(this, MobclickAgent.EScenarioType.EUmNormal);
         }
         protected abstract int LayoutResource
         {

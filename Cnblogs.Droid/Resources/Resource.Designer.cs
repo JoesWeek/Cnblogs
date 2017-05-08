@@ -2766,6 +2766,9 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0b0115
 			public const int Setting = 2131427605;
 			
+			// aapt resource value: 0x7f0b0116
+			public const int Share = 2131427606;
+			
 			// aapt resource value: 0x7f0b0113
 			public const int Statuses = 2131427603;
 			
@@ -3291,11 +3294,11 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0b0076
 			public const int select_dialog_listview = 2131427446;
 			
-			// aapt resource value: 0x7f0b0116
-			public const int send = 2131427606;
-			
 			// aapt resource value: 0x7f0b0117
-			public const int share = 2131427607;
+			public const int send = 2131427607;
+			
+			// aapt resource value: 0x7f0b0118
+			public const int share = 2131427608;
 			
 			// aapt resource value: 0x7f0b0060
 			public const int shortcut = 2131427424;
@@ -4025,26 +4028,26 @@ namespace Cnblogs.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f0c0063
-			public const int AppName = 2131492963;
+			// aapt resource value: 0x7f0c0067
+			public const int AppName = 2131492967;
 			
-			// aapt resource value: 0x7f0c0064
-			public const int AppTitle = 2131492964;
+			// aapt resource value: 0x7f0c0068
+			public const int AppTitle = 2131492968;
 			
 			// aapt resource value: 0x7f0c002a
 			public const int ApplicationName = 2131492906;
 			
-			// aapt resource value: 0x7f0c00c8
-			public const int ClientId = 2131493064;
+			// aapt resource value: 0x7f0c0064
+			public const int ClientId = 2131492964;
 			
-			// aapt resource value: 0x7f0c00c9
-			public const int ClientSercret = 2131493065;
+			// aapt resource value: 0x7f0c0065
+			public const int ClientSercret = 2131492965;
 			
 			// aapt resource value: 0x7f0c0029
 			public const int Hello = 2131492905;
 			
-			// aapt resource value: 0x7f0c00ca
-			public const int PublicKey = 2131493066;
+			// aapt resource value: 0x7f0c0066
+			public const int PublicKey = 2131492966;
 			
 			// aapt resource value: 0x7f0c0008
 			public const int abc_action_bar_home_description = 2131492872;
@@ -4139,41 +4142,41 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c001a
 			public const int abc_toolbar_collapse_description = 2131492890;
 			
-			// aapt resource value: 0x7f0c00a1
-			public const int about = 2131493025;
+			// aapt resource value: 0x7f0c00a6
+			public const int about = 2131493030;
 			
-			// aapt resource value: 0x7f0c0067
-			public const int aboutCnblogs = 2131492967;
+			// aapt resource value: 0x7f0c006b
+			public const int aboutCnblogs = 2131492971;
 			
-			// aapt resource value: 0x7f0c0066
-			public const int about_copyright = 2131492966;
+			// aapt resource value: 0x7f0c006a
+			public const int about_copyright = 2131492970;
 			
-			// aapt resource value: 0x7f0c00be
-			public const int access_token_out_of_date = 2131493054;
+			// aapt resource value: 0x7f0c00c5
+			public const int access_token_out_of_date = 2131493061;
 			
-			// aapt resource value: 0x7f0c00b0
-			public const int account = 2131493040;
-			
-			// aapt resource value: 0x7f0c0086
-			public const int addstatus = 2131492998;
-			
-			// aapt resource value: 0x7f0c008a
-			public const int addstatus_fail = 2131493002;
-			
-			// aapt resource value: 0x7f0c0087
-			public const int addstatus_hint = 2131492999;
+			// aapt resource value: 0x7f0c00b7
+			public const int account = 2131493047;
 			
 			// aapt resource value: 0x7f0c008b
-			public const int addstatus_success = 2131493003;
+			public const int addstatus = 2131493003;
 			
-			// aapt resource value: 0x7f0c0088
-			public const int addstatus_tip = 2131493000;
+			// aapt resource value: 0x7f0c008f
+			public const int addstatus_fail = 2131493007;
 			
-			// aapt resource value: 0x7f0c0089
-			public const int addstatusing = 2131493001;
+			// aapt resource value: 0x7f0c008c
+			public const int addstatus_hint = 2131493004;
 			
-			// aapt resource value: 0x7f0c00a5
-			public const int answer = 2131493029;
+			// aapt resource value: 0x7f0c0090
+			public const int addstatus_success = 2131493008;
+			
+			// aapt resource value: 0x7f0c008d
+			public const int addstatus_tip = 2131493005;
+			
+			// aapt resource value: 0x7f0c008e
+			public const int addstatusing = 2131493006;
+			
+			// aapt resource value: 0x7f0c00ac
+			public const int answer = 2131493036;
 			
 			// aapt resource value: 0x7f0c005f
 			public const int app_name = 2131492959;
@@ -4181,101 +4184,101 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c0000
 			public const int appbar_scrolling_view_behavior = 2131492864;
 			
-			// aapt resource value: 0x7f0c006e
-			public const int articleHot = 2131492974;
-			
-			// aapt resource value: 0x7f0c006d
-			public const int articlehome = 2131492973;
-			
-			// aapt resource value: 0x7f0c006c
-			public const int bolgs = 2131492972;
-			
 			// aapt resource value: 0x7f0c0073
-			public const int bookmarks = 2131492979;
+			public const int articleHot = 2131492979;
 			
-			// aapt resource value: 0x7f0c0074
-			public const int bookmarks_add = 2131492980;
+			// aapt resource value: 0x7f0c0072
+			public const int articlehome = 2131492978;
 			
-			// aapt resource value: 0x7f0c0075
-			public const int bookmarks_edit = 2131492981;
-			
-			// aapt resource value: 0x7f0c0076
-			public const int bookmarks_edit_linkurl = 2131492982;
-			
-			// aapt resource value: 0x7f0c0077
-			public const int bookmarks_edit_linkurl_hint = 2131492983;
-			
-			// aapt resource value: 0x7f0c007c
-			public const int bookmarks_edit_summary_hint = 2131492988;
-			
-			// aapt resource value: 0x7f0c007a
-			public const int bookmarks_edit_tags = 2131492986;
-			
-			// aapt resource value: 0x7f0c007b
-			public const int bookmarks_edit_tags_hint = 2131492987;
+			// aapt resource value: 0x7f0c0071
+			public const int bolgs = 2131492977;
 			
 			// aapt resource value: 0x7f0c0078
-			public const int bookmarks_edit_title = 2131492984;
+			public const int bookmarks = 2131492984;
 			
 			// aapt resource value: 0x7f0c0079
-			public const int bookmarks_edit_title_hint = 2131492985;
+			public const int bookmarks_add = 2131492985;
+			
+			// aapt resource value: 0x7f0c007a
+			public const int bookmarks_edit = 2131492986;
+			
+			// aapt resource value: 0x7f0c007b
+			public const int bookmarks_edit_linkurl = 2131492987;
+			
+			// aapt resource value: 0x7f0c007c
+			public const int bookmarks_edit_linkurl_hint = 2131492988;
+			
+			// aapt resource value: 0x7f0c0081
+			public const int bookmarks_edit_summary_hint = 2131492993;
+			
+			// aapt resource value: 0x7f0c007f
+			public const int bookmarks_edit_tags = 2131492991;
+			
+			// aapt resource value: 0x7f0c0080
+			public const int bookmarks_edit_tags_hint = 2131492992;
+			
+			// aapt resource value: 0x7f0c007d
+			public const int bookmarks_edit_title = 2131492989;
+			
+			// aapt resource value: 0x7f0c007e
+			public const int bookmarks_edit_title_hint = 2131492990;
 			
 			// aapt resource value: 0x7f0c0001
 			public const int bottom_sheet_behavior = 2131492865;
 			
-			// aapt resource value: 0x7f0c00c0
-			public const int cancel = 2131493056;
+			// aapt resource value: 0x7f0c00c7
+			public const int cancel = 2131493063;
 			
 			// aapt resource value: 0x7f0c0002
 			public const int character_counter_pattern = 2131492866;
 			
-			// aapt resource value: 0x7f0c00c5
-			public const int client_error = 2131493061;
+			// aapt resource value: 0x7f0c00cc
+			public const int client_error = 2131493068;
 			
-			// aapt resource value: 0x7f0c00a9
-			public const int comment = 2131493033;
+			// aapt resource value: 0x7f0c00b0
+			public const int comment = 2131493040;
 			
-			// aapt resource value: 0x7f0c00ad
-			public const int comment_fail = 2131493037;
+			// aapt resource value: 0x7f0c00b4
+			public const int comment_fail = 2131493044;
+			
+			// aapt resource value: 0x7f0c00b5
+			public const int comment_success = 2131493045;
+			
+			// aapt resource value: 0x7f0c00b1
+			public const int comment_tip = 2131493041;
+			
+			// aapt resource value: 0x7f0c00b2
+			public const int comment_tip2 = 2131493042;
+			
+			// aapt resource value: 0x7f0c00b3
+			public const int commenting = 2131493043;
+			
+			// aapt resource value: 0x7f0c00c6
+			public const int confirm = 2131493062;
+			
+			// aapt resource value: 0x7f0c00c9
+			public const int delete_fail = 2131493065;
+			
+			// aapt resource value: 0x7f0c00c8
+			public const int delete_success = 2131493064;
 			
 			// aapt resource value: 0x7f0c00ae
-			public const int comment_success = 2131493038;
+			public const int digg = 2131493038;
 			
-			// aapt resource value: 0x7f0c00aa
-			public const int comment_tip = 2131493034;
+			// aapt resource value: 0x7f0c006e
+			public const int drawer_close = 2131492974;
 			
-			// aapt resource value: 0x7f0c00ab
-			public const int comment_tip2 = 2131493035;
+			// aapt resource value: 0x7f0c006d
+			public const int drawer_open = 2131492973;
 			
-			// aapt resource value: 0x7f0c00ac
-			public const int commenting = 2131493036;
+			// aapt resource value: 0x7f0c0070
+			public const int error = 2131492976;
 			
-			// aapt resource value: 0x7f0c00bf
-			public const int confirm = 2131493055;
+			// aapt resource value: 0x7f0c00b6
+			public const int floor1 = 2131493046;
 			
-			// aapt resource value: 0x7f0c00c2
-			public const int delete_fail = 2131493058;
-			
-			// aapt resource value: 0x7f0c00c1
-			public const int delete_success = 2131493057;
-			
-			// aapt resource value: 0x7f0c00a7
-			public const int digg = 2131493031;
-			
-			// aapt resource value: 0x7f0c0069
-			public const int drawer_close = 2131492969;
-			
-			// aapt resource value: 0x7f0c0068
-			public const int drawer_open = 2131492968;
-			
-			// aapt resource value: 0x7f0c006b
-			public const int error = 2131492971;
-			
-			// aapt resource value: 0x7f0c00af
-			public const int floor1 = 2131493039;
-			
-			// aapt resource value: 0x7f0c007d
-			public const int kbArticles = 2131492989;
+			// aapt resource value: 0x7f0c0082
+			public const int kbArticles = 2131492994;
 			
 			// aapt resource value: 0x7f0c0062
 			public const int load_end = 2131492962;
@@ -4283,65 +4286,68 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c0061
 			public const int load_failed = 2131492961;
 			
-			// aapt resource value: 0x7f0c00c4
-			public const int load_nodata = 2131493060;
+			// aapt resource value: 0x7f0c00cb
+			public const int load_nodata = 2131493067;
 			
 			// aapt resource value: 0x7f0c0060
 			public const int loading = 2131492960;
 			
-			// aapt resource value: 0x7f0c00b2
-			public const int login = 2131493042;
+			// aapt resource value: 0x7f0c00aa
+			public const int log = 2131493034;
 			
-			// aapt resource value: 0x7f0c00bb
-			public const int login_fail = 2131493051;
-			
-			// aapt resource value: 0x7f0c00ba
-			public const int login_success = 2131493050;
+			// aapt resource value: 0x7f0c00ab
+			public const int log_tip = 2131493035;
 			
 			// aapt resource value: 0x7f0c00b9
-			public const int logining = 2131493049;
+			public const int login = 2131493049;
 			
-			// aapt resource value: 0x7f0c00b5
-			public const int logout = 2131493045;
+			// aapt resource value: 0x7f0c00c2
+			public const int login_fail = 2131493058;
 			
-			// aapt resource value: 0x7f0c00b7
-			public const int need_account = 2131493047;
+			// aapt resource value: 0x7f0c00c1
+			public const int login_success = 2131493057;
+			
+			// aapt resource value: 0x7f0c00c0
+			public const int logining = 2131493056;
 			
 			// aapt resource value: 0x7f0c00bc
-			public const int need_login = 2131493052;
+			public const int logout = 2131493052;
 			
-			// aapt resource value: 0x7f0c00b4
-			public const int need_login_tip = 2131493044;
+			// aapt resource value: 0x7f0c00be
+			public const int need_account = 2131493054;
 			
-			// aapt resource value: 0x7f0c006a
-			public const int need_network = 2131492970;
+			// aapt resource value: 0x7f0c00c3
+			public const int need_login = 2131493059;
 			
-			// aapt resource value: 0x7f0c00b8
-			public const int need_password = 2131493048;
+			// aapt resource value: 0x7f0c00bb
+			public const int need_login_tip = 2131493051;
 			
 			// aapt resource value: 0x7f0c006f
-			public const int news = 2131492975;
+			public const int need_network = 2131492975;
 			
-			// aapt resource value: 0x7f0c0070
-			public const int newshome = 2131492976;
+			// aapt resource value: 0x7f0c00bf
+			public const int need_password = 2131493055;
 			
-			// aapt resource value: 0x7f0c0071
-			public const int newsrecommend = 2131492977;
+			// aapt resource value: 0x7f0c0074
+			public const int news = 2131492980;
 			
-			// aapt resource value: 0x7f0c0072
-			public const int newsworkhot = 2131492978;
+			// aapt resource value: 0x7f0c0075
+			public const int newshome = 2131492981;
 			
-			// aapt resource value: 0x7f0c00b3
-			public const int nowlogin = 2131493043;
+			// aapt resource value: 0x7f0c0076
+			public const int newsrecommend = 2131492982;
 			
-			// aapt resource value: 0x7f0c00a4
-			public const int openSource = 2131493028;
+			// aapt resource value: 0x7f0c0077
+			public const int newsworkhot = 2131492983;
 			
-			// aapt resource value: 0x7f0c0065
-			public const int open_source_url = 2131492965;
+			// aapt resource value: 0x7f0c00ba
+			public const int nowlogin = 2131493050;
 			
-			// aapt resource value: 0x7f0c00b1
-			public const int password = 2131493041;
+			// aapt resource value: 0x7f0c0069
+			public const int open_source_url = 2131492969;
+			
+			// aapt resource value: 0x7f0c00b8
+			public const int password = 2131493048;
 			
 			// aapt resource value: 0x7f0c0003
 			public const int password_toggle_content_description = 2131492867;
@@ -4358,125 +4364,131 @@ namespace Cnblogs.Droid
 			// aapt resource value: 0x7f0c0007
 			public const int path_password_strike_through = 2131492871;
 			
-			// aapt resource value: 0x7f0c00bd
-			public const int press_back_again_to_exit = 2131493053;
+			// aapt resource value: 0x7f0c00c4
+			public const int press_back_again_to_exit = 2131493060;
 			
-			// aapt resource value: 0x7f0c00c6
-			public const int publicKey_error = 2131493062;
-			
-			// aapt resource value: 0x7f0c008c
-			public const int question = 2131493004;
-			
-			// aapt resource value: 0x7f0c009b
-			public const int question_add = 2131493019;
-			
-			// aapt resource value: 0x7f0c009e
-			public const int question_add_content_hint = 2131493022;
-			
-			// aapt resource value: 0x7f0c009f
-			public const int question_add_tag = 2131493023;
-			
-			// aapt resource value: 0x7f0c00a0
-			public const int question_add_tag_hint = 2131493024;
-			
-			// aapt resource value: 0x7f0c009c
-			public const int question_add_title = 2131493020;
-			
-			// aapt resource value: 0x7f0c009d
-			public const int question_add_title_hint = 2131493021;
-			
-			// aapt resource value: 0x7f0c0093
-			public const int question_answer = 2131493011;
-			
-			// aapt resource value: 0x7f0c0098
-			public const int question_answer_add = 2131493016;
-			
-			// aapt resource value: 0x7f0c0099
-			public const int question_answer_add_fail = 2131493017;
-			
-			// aapt resource value: 0x7f0c009a
-			public const int question_answer_add_hint = 2131493018;
-			
-			// aapt resource value: 0x7f0c0094
-			public const int question_answer_isbest = 2131493012;
-			
-			// aapt resource value: 0x7f0c0095
-			public const int question_dealflag_0 = 2131493013;
-			
-			// aapt resource value: 0x7f0c0096
-			public const int question_dealflag_1 = 2131493014;
-			
-			// aapt resource value: 0x7f0c0097
-			public const int question_dealflag_2 = 2131493015;
-			
-			// aapt resource value: 0x7f0c0092
-			public const int question_details = 2131493010;
-			
-			// aapt resource value: 0x7f0c008e
-			public const int question_highscore = 2131493006;
+			// aapt resource value: 0x7f0c00cd
+			public const int publicKey_error = 2131493069;
 			
 			// aapt resource value: 0x7f0c0091
-			public const int question_myquestion = 2131493009;
+			public const int question = 2131493009;
 			
-			// aapt resource value: 0x7f0c008f
-			public const int question_noanswer = 2131493007;
+			// aapt resource value: 0x7f0c00a0
+			public const int question_add = 2131493024;
 			
-			// aapt resource value: 0x7f0c008d
-			public const int question_none = 2131493005;
+			// aapt resource value: 0x7f0c00a3
+			public const int question_add_content_hint = 2131493027;
 			
-			// aapt resource value: 0x7f0c0090
-			public const int question_solved = 2131493008;
+			// aapt resource value: 0x7f0c00a4
+			public const int question_add_tag = 2131493028;
 			
-			// aapt resource value: 0x7f0c00a8
-			public const int read = 2131493032;
+			// aapt resource value: 0x7f0c00a5
+			public const int question_add_tag_hint = 2131493029;
 			
-			// aapt resource value: 0x7f0c00c3
-			public const int reload = 2131493059;
+			// aapt resource value: 0x7f0c00a1
+			public const int question_add_title = 2131493025;
+			
+			// aapt resource value: 0x7f0c00a2
+			public const int question_add_title_hint = 2131493026;
+			
+			// aapt resource value: 0x7f0c0098
+			public const int question_answer = 2131493016;
+			
+			// aapt resource value: 0x7f0c009d
+			public const int question_answer_add = 2131493021;
+			
+			// aapt resource value: 0x7f0c009e
+			public const int question_answer_add_fail = 2131493022;
+			
+			// aapt resource value: 0x7f0c009f
+			public const int question_answer_add_hint = 2131493023;
+			
+			// aapt resource value: 0x7f0c0099
+			public const int question_answer_isbest = 2131493017;
+			
+			// aapt resource value: 0x7f0c009a
+			public const int question_dealflag_0 = 2131493018;
+			
+			// aapt resource value: 0x7f0c009b
+			public const int question_dealflag_1 = 2131493019;
+			
+			// aapt resource value: 0x7f0c009c
+			public const int question_dealflag_2 = 2131493020;
+			
+			// aapt resource value: 0x7f0c0097
+			public const int question_details = 2131493015;
+			
+			// aapt resource value: 0x7f0c0093
+			public const int question_highscore = 2131493011;
+			
+			// aapt resource value: 0x7f0c0096
+			public const int question_myquestion = 2131493014;
+			
+			// aapt resource value: 0x7f0c0094
+			public const int question_noanswer = 2131493012;
+			
+			// aapt resource value: 0x7f0c0092
+			public const int question_none = 2131493010;
+			
+			// aapt resource value: 0x7f0c0095
+			public const int question_solved = 2131493013;
+			
+			// aapt resource value: 0x7f0c00af
+			public const int read = 2131493039;
+			
+			// aapt resource value: 0x7f0c00ca
+			public const int reload = 2131493066;
 			
 			// aapt resource value: 0x7f0c001b
 			public const int search_menu_title = 2131492891;
 			
-			// aapt resource value: 0x7f0c00a6
-			public const int send = 2131493030;
+			// aapt resource value: 0x7f0c00ad
+			public const int send = 2131493037;
 			
-			// aapt resource value: 0x7f0c00b6
-			public const int seniority = 2131493046;
+			// aapt resource value: 0x7f0c00bd
+			public const int seniority = 2131493053;
 			
-			// aapt resource value: 0x7f0c00a2
-			public const int setting = 2131493026;
+			// aapt resource value: 0x7f0c00a7
+			public const int setting = 2131493031;
+			
+			// aapt resource value: 0x7f0c00a8
+			public const int share = 2131493032;
+			
+			// aapt resource value: 0x7f0c006c
+			public const int share_title = 2131492972;
 			
 			// aapt resource value: 0x7f0c001c
 			public const int status_bar_notification_info_overflow = 2131492892;
 			
-			// aapt resource value: 0x7f0c007e
-			public const int statuses = 2131492990;
-			
-			// aapt resource value: 0x7f0c007f
-			public const int statuses_all = 2131492991;
-			
-			// aapt resource value: 0x7f0c0085
-			public const int statuses_comment = 2131492997;
-			
-			// aapt resource value: 0x7f0c0080
-			public const int statuses_following = 2131492992;
+			// aapt resource value: 0x7f0c0083
+			public const int statuses = 2131492995;
 			
 			// aapt resource value: 0x7f0c0084
-			public const int statuses_mention = 2131492996;
+			public const int statuses_all = 2131492996;
 			
-			// aapt resource value: 0x7f0c0081
-			public const int statuses_my = 2131492993;
+			// aapt resource value: 0x7f0c008a
+			public const int statuses_comment = 2131493002;
 			
-			// aapt resource value: 0x7f0c0082
-			public const int statuses_mycomment = 2131492994;
+			// aapt resource value: 0x7f0c0085
+			public const int statuses_following = 2131492997;
 			
-			// aapt resource value: 0x7f0c0083
-			public const int statuses_recentcomment = 2131492995;
+			// aapt resource value: 0x7f0c0089
+			public const int statuses_mention = 2131493001;
 			
-			// aapt resource value: 0x7f0c00a3
-			public const int survey = 2131493027;
+			// aapt resource value: 0x7f0c0086
+			public const int statuses_my = 2131492998;
 			
-			// aapt resource value: 0x7f0c00c7
-			public const int survey_email = 2131493063;
+			// aapt resource value: 0x7f0c0087
+			public const int statuses_mycomment = 2131492999;
+			
+			// aapt resource value: 0x7f0c0088
+			public const int statuses_recentcomment = 2131493000;
+			
+			// aapt resource value: 0x7f0c00a9
+			public const int survey = 2131493033;
+			
+			// aapt resource value: 0x7f0c0063
+			public const int survey_email = 2131492963;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int umeng_example_home_btn_plus = 2131492924;

@@ -17,7 +17,7 @@ namespace Cnblogs.Droid.Presenter
     public interface IStatusColumnPresenter
     {
         Task GetServiceStatus(AccessToken token, int position, int pageIndex = 1);
-        Task GetClientStatus(int position);
+        Task GetClientStatus();
         void DeleteStatus(AccessToken token, int id);
     }
 }

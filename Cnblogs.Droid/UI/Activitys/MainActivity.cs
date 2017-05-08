@@ -16,16 +16,21 @@ using Cnblogs.Droid.UI.Shareds;
 using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
 using Com.Iflytek.Autoupdate;
+using Com.Umeng.Socialize;
+using Com.Umeng.Socialize.Bean;
+using Com.Umeng.Socialize.Utils;
 using Square.Picasso;
 using System;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
+using Com.Umeng.Socialize.Shareboard;
+using Com.Umeng.Socialize.Media;
 
 namespace Cnblogs.Droid
 {
     [Activity(LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
-    public class MainActivity : BaseActivity, DrawerLayout.IDrawerListener, NavigationView.IOnNavigationItemSelectedListener, View.IOnClickListener, Toolbar.IOnMenuItemClickListener, IFlytekUpdateListener
+    public class MainActivity : BaseActivity, DrawerLayout.IDrawerListener, NavigationView.IOnNavigationItemSelectedListener, View.IOnClickListener, Toolbar.IOnMenuItemClickListener, IFlytekUpdateListener, IShareBoardlistener
     {
         private Handler handler;
         private CoordinatorLayout coordinatorLayout;
@@ -44,10 +49,11 @@ namespace Cnblogs.Droid
         private ImageView Avatar;
         private TextView Author;
         private TextView Seniority;
-        private TextView Logout;
+        private TextView txtLogout;
         // 首次按下返回键时间戳
         private DateTime firstBackPressedTime = DateTime.MinValue;
         private IFlytekUpdate updManager;
+        private ShareAction shareAction;
 
         protected override int LayoutResource => Resource.Layout.Main;
         public static void Start(Context context)
@@ -76,7 +82,12 @@ namespace Cnblogs.Droid
             Avatar.SetOnClickListener(this);
             Author = headerLayout.FindViewById<TextView>(Resource.Id.headerAuthor);
             Seniority = headerLayout.FindViewById<TextView>(Resource.Id.headerSeniority);
-            Logout = headerLayout.FindViewById<TextView>(Resource.Id.headerLogout);
+            txtLogout = headerLayout.FindViewById<TextView>(Resource.Id.headerLogout);
+            txtLogout.Click += delegate
+            {
+                LoginUtils.Instance(this).DeleteUser();
+                UpdateUserView();
+            };
 
             drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.drawer_open, Resource.String.drawer_close);
             drawerLayout.AddDrawerListener(this);
@@ -85,7 +96,7 @@ namespace Cnblogs.Droid
 
             StatusBarCompat.SetDrawerToolbarTabLayout(this, coordinatorLayout);
 
-            UpdateUserInfoViews();
+            UpdateUserView();
 
             navigationView.Post(() =>
             {
@@ -98,7 +109,12 @@ namespace Cnblogs.Droid
             updManager.SetParameter(UpdateConstants.ExtraNotiIcon, "true");
             updManager.SetParameter(UpdateConstants.ExtraStyle, UpdateConstants.UpdateUiDialog);
             updManager.AutoUpdate(this, this);
+
+            shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
+
         }
+        
+        #region DrawerLayout
         protected override void OnPostCreate(Bundle savedInstanceState)
         {
             base.OnPostCreate(savedInstanceState);
@@ -112,13 +128,29 @@ namespace Cnblogs.Droid
         {
             base.OnConfigurationChanged(newConfig);
             drawerToggle.OnConfigurationChanged(newConfig);
+            shareAction.Close();
         }
         public void OnDrawerClosed(View drawerView)
         {
+            if (!LoginUtils.Instance(this).GetLoginStatus())
+            {
+                switch (lastSelecteID)
+                {
+                    case Resource.Id.bookmarks:
+                        bookmarksFragment.OnRefresh();
+                        break;
+                    case Resource.Id.Statuses:
+                        statusesFragment.SetTabSelected();
+                        break;
+                    case Resource.Id.Question:
+                        questionsFragment.SetTabSelected();
+                        break;
+                }
+            }
         }
         public void OnDrawerOpened(View drawerView)
         {
-            UpdateUserInfoViews();
+            UpdateUserView();
         }
         public void OnDrawerSlide(View drawerView, float slideOffset)
         {
@@ -126,6 +158,8 @@ namespace Cnblogs.Droid
         public void OnDrawerStateChanged(int newState)
         {
         }
+        #endregion
+
         public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
             if (lastSelecteID != menuItem.ItemId)
@@ -134,6 +168,9 @@ namespace Cnblogs.Droid
                 {
                     case Resource.Id.Setting:
                         SettingActivity.Start(this);
+                        break;
+                    case Resource.Id.Share:
+                        shareAction.Open();
                         break;
                     default:
                         SwitchNavigationBar(menuItem.ItemId);
@@ -169,6 +206,8 @@ namespace Cnblogs.Droid
             }
             return true;
         }
+
+        #region SwitchNavigationBar
         public void SwitchNavigationBar(int id)
         {
             if (lastSelecteID > 0)
@@ -354,6 +393,8 @@ namespace Cnblogs.Droid
                 transaction.Hide(bookmarksFragment).Commit();
             }
         }
+        #endregion
+
         public async void OnClick(View v)
         {
             switch (v.Id)
@@ -380,13 +421,13 @@ namespace Cnblogs.Droid
                 switch (requestCode)
                 {
                     case (int)RequestCode.LoginCode:
-                        UpdateUserInfoViews();
+                        UpdateUserView();
                         break;
                     case (int)RequestCode.StatusAddCode:
-                        statusesFragment.Refresh(0);
+                        statusesFragment.SetTabSelected(0);
                         break;
                     case (int)RequestCode.QuestionAddCode:
-                        questionsFragment.Refresh(0);
+                        questionsFragment.SetTabSelected(0);
                         break;
                     case (int)RequestCode.BookmarkAddCode:
                         bookmarksFragment.OnRefresh();
@@ -394,54 +435,28 @@ namespace Cnblogs.Droid
                 }
             }
         }
-        public async void UpdateUserInfoViews()
+        public void UpdateUserView()
         {
-            var token = UserShared.GetAccessToken(this);
-            if (token != null && token.access_token != "")
+            handler.Post(async () =>
             {
-                if (token.RefreshTime.AddSeconds(token.expires_in) < DateTime.Now)
+                if (LoginUtils.Instance(this).GetLoginStatus())
                 {
-                    DeleteUserToken();
-                    Author.Text = Resources.GetString(Resource.String.need_login);
-                    Seniority.Text = "";
-                    Logout.Visibility = ViewStates.Gone;
-                    Toast.MakeText(this, Resources.GetString(Resource.String.access_token_out_of_date), ToastLength.Long).Show();
+                    var user = await LoginUtils.Instance(this).GetUser();
+                    Author.Text = user.DisplayName;
+                    Seniority.Text = Resources.GetString(Resource.String.seniority) + "：" + user.Seniority;
+                    txtLogout.Visibility = ViewStates.Visible;
+                    Picasso.With(this)
+                                .Load(user.Avatar)
+                                .Placeholder(Resource.Drawable.placeholder)
+                                .Error(Resource.Drawable.placeholder)
+                                .Transform(new CircleTransform())
+                                .Into(Avatar);
                 }
                 else
                 {
-                    var user = await SQLiteUtils.Instance().QueryUser();
-                    if (user != null && user.UserId != null)
-                    {
-                        Author.Text = user.DisplayName;
-                        Seniority.Text = Resources.GetString(Resource.String.seniority) + "：" + user.Seniority;
-                        Logout.Visibility = ViewStates.Visible;
-                        Logout.Click += delegate
-                        {
-                            DeleteUserToken();
-                            UpdateUserInfoViews();
-                        };
-                        try
-                        {
-                            Picasso.With(this)
-                                        .Load(user.Avatar)
-                                        .Placeholder(Resource.Drawable.placeholder)
-                                        .Error(Resource.Drawable.placeholder)
-                                        .Transform(new CircleTransform())
-                                        .Into(Avatar);
-                        }
-                        catch
-                        {
-                        }
-                    }
-                }
-            }
-            else
-            {
-                Author.Text = Resources.GetString(Resource.String.need_login);
-                Seniority.Text = "";
-                Logout.Visibility = ViewStates.Gone;
-                try
-                {
+                    Author.Text = Resources.GetString(Resource.String.need_login);
+                    Seniority.Text = "";
+                    txtLogout.Visibility = ViewStates.Gone;
                     Picasso.With(this)
                                 .Load(Resource.Drawable.placeholder)
                                 .Placeholder(Resource.Drawable.placeholder)
@@ -449,16 +464,7 @@ namespace Cnblogs.Droid
                                 .Transform(new CircleTransform())
                                 .Into(Avatar);
                 }
-                catch (Exception ex)
-                {
-
-                }
-            }
-        }
-        public async void DeleteUserToken()
-        {
-            UserShared.Update(this, new AccessToken());
-            await SQLiteUtils.Instance().DeleteUserAll();
+            });
         }
         public override void OnBackPressed()
         {
@@ -474,7 +480,19 @@ namespace Cnblogs.Droid
             }
             else
             {
-                base.OnBackPressed();
+                if (firstBackPressedTime == DateTime.MinValue)
+                {
+                    Toast.MakeText(this, "再按一次退出程序", ToastLength.Short).Show();
+                    firstBackPressedTime = DateTime.Now;
+                }
+                else if (firstBackPressedTime.AddSeconds(2) < DateTime.Now)
+                {
+                    Android.Support.V4.App.ActivityCompat.FinishAfterTransition(this);
+                }
+                else
+                {
+                    base.OnBackPressed();
+                }
             }
         }
         public async void ShowLogin()
@@ -508,11 +526,19 @@ namespace Cnblogs.Droid
                     }
                     updManager.ShowUpdateInfo(this, result);
                 }
-                else
-                {
-                    Toast.MakeText(this, "请求更新失败！\n更新错误码：" + errorcode, ToastLength.Short).Show();
-                }
             });
+        }
+
+        public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
+        {
+            UMWeb web = new UMWeb(Resources.GetString(Resource.String.open_source_url));
+            web.Title = Resources.GetString(Resource.String.share_title);
+            web.Description = Resources.GetString(Resource.String.share_title);
+            web.SetThumb(new UMImage(this, Resource.Mipmap.ic_launcher));
+            new ShareAction(this).WithMedia(web)
+                    .SetPlatform(media)
+                    .SetCallback(new UMengCustomShare(this))
+                    .Share();
         }
     }
 }

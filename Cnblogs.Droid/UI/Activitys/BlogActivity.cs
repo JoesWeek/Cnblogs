@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Support.V4.App;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -243,7 +244,7 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void OnClick(View v)
         {
-            this.Finish();
+            ActivityCompat.FinishAfterTransition(this);
         }
     }
 }

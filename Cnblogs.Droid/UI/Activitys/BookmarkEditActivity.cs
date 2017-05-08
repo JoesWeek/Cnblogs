@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using Cnblogs.Droid.Model;
@@ -170,7 +171,7 @@ namespace Cnblogs.Droid.UI.Activitys
                 intent.PutExtra("id", Id);
                 intent.PutExtra("position", position);
                 SetResult(Result.Ok, intent);
-                this.Finish();
+                ActivityCompat.FinishAfterTransition(this);
             });
         }
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
@@ -183,7 +184,7 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void OnClick(View v)
         {
-            this.Finish();
+            ActivityCompat.FinishAfterTransition(this);
         }
     }
 }

@@ -51,7 +51,10 @@ namespace Cnblogs.Droid.Utils
                     return new ResultMessage() { IsError = true, Message = "401 Unauthorized" };
                 case (int)System.Net.HttpStatusCode.InternalServerError:
                     MobclickAgent.ReportError(Context, body);
-                    return new ResultMessage() { IsError = true, Message = "内部服务器错误" };
+                    return new ResultMessage() { IsError = true, Message = "500 InternalServerError" };
+                case (int)System.Net.HttpStatusCode.BadGateway:
+                    MobclickAgent.ReportError(Context, body);
+                    return new ResultMessage() { IsError = true, Message = "502 BadGateway" };
                 default:
                     MobclickAgent.ReportError(Context, body);
                     return new ResultMessage() { IsError = true, Message = "网络链接不可用 ,请稍后再试" };

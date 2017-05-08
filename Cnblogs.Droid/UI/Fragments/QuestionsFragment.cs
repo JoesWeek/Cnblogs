@@ -38,10 +38,6 @@ namespace Cnblogs.Droid.UI.Fragments
             tabs.TabMode = TabLayout.GravityCenter;
             tabs.SetupWithViewPager(viewPager);
             tabs.AddOnTabSelectedListener(this);
-            tabs.Post(() =>
-            {
-                adapter.OnRefresh(0);
-            });
         }
         public void OnTabReselected(TabLayout.Tab tab)
         {
@@ -56,10 +52,18 @@ namespace Cnblogs.Droid.UI.Fragments
         public void OnTabUnselected(TabLayout.Tab tab)
         {
         }
-        public void Refresh(int position)
+        /// <summary>
+        /// 设置选中选项卡，强制刷新数据
+        /// </summary>
+        /// <param name="position">选项卡位置</param>
+        public void SetTabSelected(int position)
         {
             viewPager.CurrentItem = position;
-            adapter.Refresh(position);
+            adapter.OnRefresh(position, true);
+        }
+        public void SetTabSelected()
+        {
+            SetTabSelected(viewPager.CurrentItem);
         }
     }
 }

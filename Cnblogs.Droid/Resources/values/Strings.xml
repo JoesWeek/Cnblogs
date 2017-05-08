@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!--需要申请开通open api调用权限，获取ClientId和ClientSercret-->
+  <string name="survey_email"></string>
+  <string name="ClientId"></string>
+  <string name="ClientSercret"></string>
+  <string name="PublicKey"></string>
+
   <string name="AppName">博客园</string>
   <string name="AppTitle">—  代码改变世界  —</string>
   <string name="open_source_url">https://github.com/JoesWeek/Cnblogs</string>
   <string name="about_copyright">Copyright © 2017 JoesWeek</string>
   <string name="aboutCnblogs">博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。</string>
+  <string name="share_title">博客园第三方Android客户端，Xamarin App，Material Design风格</string>
   <string name="drawer_open">打开</string>
   <string name="drawer_close">关闭</string>
   <string name="need_network">访问网络失败，请打开网络连接</string>
   <string name="error">似乎出了点问题</string>
 
   <string name="bolgs">首页</string>
-  
+
   <string name="articlehome">博文</string>
   <string name="articleHot">精华</string>
 
@@ -19,7 +26,7 @@
   <string name="newshome">最新发布</string>
   <string name="newsrecommend">推荐新闻</string>
   <string name="newsworkhot">本周热门</string>
-  
+
   <string name="bookmarks">收藏</string>
   <string name="bookmarks_add">添加新收藏</string>
   <string name="bookmarks_edit">编辑收藏</string>
@@ -30,9 +37,9 @@
   <string name="bookmarks_edit_tags">标签</string>
   <string name="bookmarks_edit_tags_hint">为收藏添加标签，多个标签用逗号分隔。</string>
   <string name="bookmarks_edit_summary_hint">摘要不超过200字。</string>
-  
+
   <string name="kbArticles">知识库</string>
-  
+
   <string name="statuses">闪存</string>
   <string name="statuses_all">全站</string>
   <string name="statuses_following">关注</string>
@@ -47,9 +54,9 @@
   <string name="addstatusing">正在发布中</string>
   <string name="addstatus_fail">发布失败,请重试</string>
   <string name="addstatus_success">发布成功</string>
-  
+
   <string name="kbArticles">知识库</string>
-  
+
   <string name="question">博问</string>
   <string name="question_none">待解决</string>
   <string name="question_highscore">高分</string>
@@ -71,11 +78,13 @@
   <string name="question_add_content_hint">详细描述您所遇到的问题，以便得到园友最好最有针对性的回答。</string>
   <string name="question_add_tag">标签</string>
   <string name="question_add_tag_hint">准确的Tag有助于专家高手发现问题，Tag最多5个</string>
-  
+
   <string name="about">关于</string>
   <string name="setting">设置</string>
+  <string name="share">分享</string>
   <string name="survey">意见反馈</string>
-  <string name="openSource">开放源代码许可</string>
+  <string name="log">Log</string>
+  <string name="log_tip">非常抱歉，程序运出现了错误。</string>
 
   <string name="answer">回答</string>
   <string name="send">发送</string>
@@ -87,7 +96,7 @@
   <string name="commenting">正在评论中</string>
   <string name="comment_fail">评论失败,请重试</string>
   <string name="comment_success">评论成功</string>
-  
+
   <string name="floor1">楼</string>
   <string name="account">用户名</string>
   <string name="password">密码</string>
@@ -109,19 +118,14 @@
   <string name="cancel">取消</string>
   <string name="delete_success">删除成功</string>
   <string name="delete_fail">删除失败</string>
-  
+
   <string name="loading">正在加载中...</string>
   <string name="load_failed">加载失败，重新加载</string>
   <string name="reload">重新加载</string>
   <string name="load_end">没有更多内容</string>
   <string name="load_nodata">还没有内容</string>
-  
+
   <string name="client_error">未设置ClientId或ClientSercret</string>
   <string name="publicKey_error">未设置PublicKey</string>
-  
-  <!--需要申请开通open api调用权限，获取ClientId和ClientSercret-->
-  <string name="survey_email"></string>
-  <string name="ClientId"></string>
-  <string name="ClientSercret"></string>
-  <string name="PublicKey"></string>
+
 </resources>

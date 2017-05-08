@@ -66,15 +66,8 @@ namespace Cnblogs.Droid.UI.Fragments
             recyclerView.Post(async () =>
             {
                 await articlesPresenter.GetClientKbArticles();
-                NeedRefresh();
-            });
-        }
-        public void NeedRefresh()
-        {
-            if (refreshTime.AddMinutes(15) < DateTime.Now)
-            {
                 OnRefresh();
-            }
+            });
         }
         public async void OnRefresh()
         {
@@ -178,10 +171,6 @@ namespace Cnblogs.Droid.UI.Fragments
                 {
                     swipeRefreshLayout.Refreshing = false;
                 }
-            }
-            else
-            {
-                NeedRefresh();
             }
         }
     }

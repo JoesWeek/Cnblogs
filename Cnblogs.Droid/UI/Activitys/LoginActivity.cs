@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.Net;
 using Android.OS;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
@@ -84,7 +85,7 @@ namespace Cnblogs.Droid.UI.Activitys
                     InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
                     imm.HideSoftInputFromWindow(editPassword.WindowToken, 0);
                     SetResult(Result.Canceled);
-                    this.Finish();
+                    ActivityCompat.FinishAfterTransition(this);
                     break;
             }
         }

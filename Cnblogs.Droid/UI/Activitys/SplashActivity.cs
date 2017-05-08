@@ -1,6 +1,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Support.V4.App;
 using Android.Widget;
 using Cnblogs.Droid.Model;
 using Cnblogs.Droid.Presenter;
@@ -72,7 +73,7 @@ namespace Cnblogs.Droid.UI.Activitys
         public void StartMain()
         {
             MainActivity.Start(this);
-            this.Finish();
+            ActivityCompat.FinishAfterTransition(this);
         }
     }
 }

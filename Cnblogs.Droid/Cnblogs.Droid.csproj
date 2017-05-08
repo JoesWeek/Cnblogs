@@ -272,6 +272,7 @@
     <Compile Include="UI\Adapters\ArticlesTabsAdapter.cs" />
     <Compile Include="UI\Behaviors\BottomBehavior.cs" />
     <Compile Include="UI\Behaviors\ScrollDirection.cs" />
+    <Compile Include="UI\Broadcasts\LoginReceiver.cs" />
     <Compile Include="UI\Fragments\BookmarksFragment.cs" />
     <Compile Include="UI\Fragments\QuestionsColumnFragment.cs" />
     <Compile Include="UI\Fragments\QuestionsFragment.cs" />
@@ -325,6 +326,7 @@
     <Compile Include="Utils\DateTimeUtils.cs" />
     <Compile Include="Utils\DESUtils.cs" />
     <Compile Include="Utils\HtmlUtils.cs" />
+    <Compile Include="Utils\LoginUtils.cs" />
     <Compile Include="Utils\MD5Utils.cs" />
     <Compile Include="Utils\OkHttpUtils.cs" />
     <Compile Include="Utils\RSAUtils.cs" />
@@ -737,6 +739,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\line.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -105,7 +106,8 @@ namespace Cnblogs.Droid.UI.Activitys
                 default:
                     InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
                     imm.HideSoftInputFromWindow(txtContent.WindowToken, 0);
-                    this.Finish();
+
+                    ActivityCompat.FinishAfterTransition(this);
                     break;
             }
         }

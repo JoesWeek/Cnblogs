@@ -33,15 +33,15 @@ namespace Cnblogs.Droid.UI.Adapters
         {
             return new Java.Lang.String(Columns[p0]);
         }
-        public void OnRefresh(int position)
+        /// <summary>
+        /// 刷新数据
+        /// </summary>
+        /// <param name="position">position</param>
+        /// <param name="isRefresh">强制刷新</param>
+        public void OnRefresh(int position, bool isRefresh = false)
         {
             if (columnFragmentList.Count > 0)
-                columnFragmentList[position].NeedRefresh();
-        }
-        public void Refresh(int position)
-        {
-            if (columnFragmentList.Count > 0)
-                columnFragmentList[position].OnRefresh();
+                columnFragmentList[position].OnRefresh(isRefresh);
         }
     }
 }

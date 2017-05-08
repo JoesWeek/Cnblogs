@@ -9,6 +9,7 @@ using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
 using Square.Picasso;
 using System;
+using System.Linq;
 
 namespace Cnblogs.Droid.UI.Adapters
 {
@@ -90,7 +91,7 @@ namespace Cnblogs.Droid.UI.Adapters
                 default:
                     if (v.Tag != null)
                     {
-                        var answer = GetData()[Convert.ToInt32(v.Tag.ToString())];
+                        var answer = GetData().Where(d => d.AnswerID == Convert.ToInt32(v.Tag.ToString())).FirstOrDefault();
                         QuestionCommentsActivity.Start(context, answer.Qid, answer.AnswerID);
                     }
                     break;

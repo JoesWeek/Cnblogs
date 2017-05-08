@@ -81,7 +81,7 @@ namespace Cnblogs.Droid.UI.Fragments
                 await articlesPresenter.GetClientArticles(position);
             });
         }
-        public void NeedRefresh()
+        public void Refresh()
         {
             if (refreshTime.AddMinutes(15) < DateTime.Now)
             {
@@ -191,10 +191,6 @@ namespace Cnblogs.Droid.UI.Fragments
                 {
                     swipeRefreshLayout.Refreshing = false;
                 }
-            }
-            else
-            {
-                NeedRefresh();
             }
         }
     }

@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Support.V4.Widget;
 using Android.Text;
 using Android.Views;
@@ -69,7 +70,6 @@ namespace Cnblogs.Droid.UI.Activitys
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             toolbar.SetNavigationOnClickListener(this);
             toolbar.SetOnMenuItemClickListener(this);
-
             swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipeRefreshLayout);
             swipeRefreshLayout.SetColorSchemeResources(Resource.Color.primary);
             swipeRefreshLayout.SetOnRefreshListener(this);
@@ -108,6 +108,7 @@ namespace Cnblogs.Droid.UI.Activitys
             });
 
             shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
+
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -217,7 +218,7 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void OnClick(View v)
         {
-            this.Finish();
+            ActivityCompat.FinishAfterTransition(this);
         }
         public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
         {

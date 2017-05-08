@@ -91,14 +91,17 @@ namespace Cnblogs.Droid.UI.Fragments
             };
             recyclerView.Post(async () =>
             {
-                if (position == 4)
+                if (position < 4)
                 {
-                    if (await ChenkLogin())
-                    {
-                        return;
-                    }
+                    await questionPresenter.GetClientQuestions(position);
                 }
-                await questionPresenter.GetClientQuestions(position);
+                else if (!LoginUtils.Instance(this.Activity).GetLoginStatus())
+                {
+                    recyclerView.Post(() =>
+                    {
+                        adapter.SetEmptyView(nologinView);
+                    });
+                }
             });
         }
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
@@ -111,63 +114,60 @@ namespace Cnblogs.Droid.UI.Fragments
         public override void OnResume()
         {
             base.OnResume();
-            NeedRefresh();
+            OnRefresh(false);
         }
-        public async void NeedRefresh()
+        public void OnRefresh()
         {
-            if (position == 4)
-            {
-                if (await ChenkLogin())
-                {
-                    return;
-                }
-            }
-            if (refreshTime.AddMinutes(15) < DateTime.Now)
-            {
-                OnRefresh();
-            }
+            OnRefresh(true);
         }
-        public async void OnRefresh()
+        public void OnRefresh(bool isRefresh)
         {
-            if (position == 4)
+            if (position < 4)
             {
-                swipeRefreshLayout.Enabled = false;
-                if (await ChenkLogin())
+                if (isRefresh)
                 {
-                    return;
+                    GetServiceData();
                 }
-                else
+                else if (refreshTime.AddMinutes(15) < DateTime.Now)
                 {
-                    swipeRefreshLayout.Enabled = true;
+                    //获取数据
+                    GetServiceData();
                 }
             }
             else
             {
-                swipeRefreshLayout.Enabled = true;
+                if (LoginUtils.Instance(this.Activity).GetLoginStatus())
+                {
+                    if (isRefresh)
+                    {
+                        GetServiceData();
+                    }
+                    else if (refreshTime.AddMinutes(15) < DateTime.Now)
+                    {
+                        //获取数据
+                        GetServiceData();
+                    }
+                }
+                else
+                {
+                    swipeRefreshLayout.Refreshing = false;
+
+                    recyclerView.Post(() =>
+                    {
+                        adapter.SetNewData(new List<QuestionsModel>());
+                        adapter.SetEmptyView(nologinView);
+                    });
+                }
             }
+        }
+        public async void GetServiceData()
+        {
             if (pageIndex > 1)
                 pageIndex = 1;
             swipeRefreshLayout.Refreshing = true;
+
             await questionPresenter.GetServiceQuestions(position == 4 ? UserShared.GetAccessToken(this.Activity) : TokenShared.GetAccessToken(this.Activity), position, pageIndex);
         }
-        public async Task<bool> ChenkLogin()
-        {
-            var user = UserShared.GetAccessToken(this.Activity);
-            if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
-            {
-                //未登录或清空Token失效
-                //清空Token
-                UserShared.Update(this.Activity, new AccessToken());
-                await SQLiteUtils.Instance().DeleteUserAll();
-                recyclerView.Post(() =>
-                {
-                    adapter.SetEmptyView(nologinView);
-                });
-                return true;
-            }
-            return false;
-        }
-
         public void GetServiceQuestionsFail(string msg)
         {
             recyclerView.Post(() =>
@@ -191,7 +191,6 @@ namespace Cnblogs.Droid.UI.Fragments
                 Toast.MakeText(this.Activity, msg, ToastLength.Short).Show();
             });
         }
-
         public void GetServiceQuestionsSuccess(List<QuestionsModel> lists)
         {
             recyclerView.Post(() =>
@@ -265,19 +264,7 @@ namespace Cnblogs.Droid.UI.Fragments
                     swipeRefreshLayout.Refreshing = false;
                 }
             }
-            else
-            {
-                NeedRefresh();
-            }
             this.Activity.InvalidateOptionsMenu();
-        }
-        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-            if (requestCode == (int)RequestCode.LoginCode && resultCode == (int)Result.Ok)
-            {
-                NeedRefresh();
-            }
         }
     }
 }

@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Support.V4.Widget;
 using Android.Text;
 using Android.Views;
@@ -198,7 +199,7 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void OnClick(View v)
         {
-            this.Finish();
+            ActivityCompat.FinishAfterTransition(this);
         }
         public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
         {
