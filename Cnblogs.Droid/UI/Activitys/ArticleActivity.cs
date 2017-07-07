@@ -16,10 +16,6 @@ using Cnblogs.Droid.UI.Views;
 using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
 using Com.Umeng.Socialize;
-using Com.Umeng.Socialize.Bean;
-using Com.Umeng.Socialize.Media;
-using Com.Umeng.Socialize.Shareboard;
-using Com.Umeng.Socialize.Utils;
 using Square.Picasso;
 using System;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
@@ -27,7 +23,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Cnblogs.Droid.UI.Activitys
 {
     [Activity(Label = "@string/articlehome", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
-    public class ArticleActivity : BaseActivity, IArticleView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener, IShareBoardlistener
+    public class ArticleActivity : BaseActivity, IArticleView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener
     {
         private int Id;
         private IArticlePresenter articlePresenter;
@@ -47,7 +43,7 @@ namespace Cnblogs.Droid.UI.Activitys
         private TextView txtBookmark;
 
         private ArticlesModel article;
-        private ShareAction shareAction;
+        private UMengSharesWidget sharesWidget;
         protected override int LayoutResource => Resource.Layout.article;
         public static void Start(Context context, int id)
         {
@@ -106,9 +102,8 @@ namespace Cnblogs.Droid.UI.Activitys
             {
                 await articlePresenter.GetClientArticle(Id);
             });
-
-            shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
-
+            
+            sharesWidget = new UMengSharesWidget(this);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -120,7 +115,7 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             if (article != null)
             {
-                shareAction.Open();
+                sharesWidget.Open(article.Url,article.Title);
             }
             return true;
         }
@@ -131,7 +126,7 @@ namespace Cnblogs.Droid.UI.Activitys
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
-            shareAction.Close();
+            sharesWidget.Close();
         }
         public async void OnRefresh()
         {
@@ -219,16 +214,6 @@ namespace Cnblogs.Droid.UI.Activitys
         public void OnClick(View v)
         {
             ActivityCompat.FinishAfterTransition(this);
-        }
-        public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
-        {
-            UMWeb web = new UMWeb(article.Url);
-            web.Title = article.Title;
-            web.Description = article.Description;
-            new ShareAction(this).WithMedia(web)
-                    .SetPlatform(media)
-                    .SetCallback(new UMengCustomShare(this))
-                    .Share();
         }
     }
 }

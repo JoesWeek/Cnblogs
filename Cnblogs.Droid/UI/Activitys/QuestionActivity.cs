@@ -27,7 +27,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Cnblogs.Droid.UI.Activitys
 {
     [Activity(Label = "@string/question_details", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
-    public class QuestionActivity : BaseActivity, IQuestionView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener, IShareBoardlistener
+    public class QuestionActivity : BaseActivity, IQuestionView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener
     {
         private int Id;
         private IQuestionPresenter questionPresenter;
@@ -51,7 +51,7 @@ namespace Cnblogs.Droid.UI.Activitys
         private DateTime lastDatetime;
 
         private QuestionsModel question;
-        private ShareAction shareAction;
+        private UMengSharesWidget sharesWidget;
         protected override int LayoutResource => Resource.Layout.question;
         public static void Start(Context context, int id)
         {
@@ -129,7 +129,7 @@ namespace Cnblogs.Droid.UI.Activitys
             {
                 await questionPresenter.GetClientQuestion(Id);
             });
-            shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
+            sharesWidget = new UMengSharesWidget(this);
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -140,7 +140,7 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             if (question != null)
             {
-                shareAction.Open();
+                sharesWidget.Open("https://q.cnblogs.com/q/" + question.Qid + "/", question.Title);
             }
             return true;
         }
@@ -151,7 +151,7 @@ namespace Cnblogs.Droid.UI.Activitys
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
-            shareAction.Close();
+            sharesWidget.Close();
         }
         protected override void OnResume()
         {
@@ -286,16 +286,6 @@ namespace Cnblogs.Droid.UI.Activitys
         public void OnClick(View v)
         {
             ActivityCompat.FinishAfterTransition(this);
-        }
-        public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
-        {
-            UMWeb web = new UMWeb("https://q.cnblogs.com/q/" + question.Qid + "/");
-            web.Title = question.Title;
-            web.Description = question.Summary;
-            new ShareAction(this).WithMedia(web)
-                    .SetPlatform(media)
-                    .SetCallback(new UMengCustomShare(this))
-                    .Share();
         }
     }
 }

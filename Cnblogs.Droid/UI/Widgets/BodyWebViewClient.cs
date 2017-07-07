@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Webkit;
 using Android.Util;
 using Android.Graphics;
+using Com.Umeng.Analytics;
 
 namespace Cnblogs.Droid.UI.Widgets
 {
@@ -64,10 +65,18 @@ namespace Cnblogs.Droid.UI.Widgets
         [Obsolete]
         public override bool ShouldOverrideUrlLoading(WebView view, string url)
         {
-            Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
-            intent.SetClassName("com.android.browser", "com.android.browser.BrowserActivity");
-            intent.AddFlags(ActivityFlags.NewTask);
-            context.StartActivity(intent);
+            try
+            {
+                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
+                intent.SetClassName("com.android.browser", "com.android.browser.BrowserActivity");
+                intent.AddFlags(ActivityFlags.NewTask);
+                context.StartActivity(intent);
+            }
+            catch (Exception ex)
+            {
+                MobclickAgent.ReportError(context, ex.Message);
+                Toast.MakeText(context, "系统中没有安装浏览器客户端", ToastLength.Short).Show();
+            }
             return true;
         }
     }

@@ -119,7 +119,7 @@ namespace Cnblogs.Droid.UI.Activitys
             swipeRefreshLayout.Refreshing = true;
             //ÊÇ·ñµÇÂ¼
             var user = UserShared.GetAccessToken(this);
-            if (user.access_token != ""&& user.RefreshTime.AddSeconds(user.expires_in) > DateTime.Now)
+            if (user.access_token != "" && user.RefreshTime.AddSeconds(user.expires_in) > DateTime.Now)
             {
                 await statusPresenter.GetServiceStatus(user, Id);
             }
@@ -173,7 +173,7 @@ namespace Cnblogs.Droid.UI.Activitys
                 {
                     var Content = model.Content + " ";
                     var spanText = new SpannableString(Html.FromHtml(Content));
-                    spanText.SetSpan(new CenteredImageSpan(this, Resource.Drawable.luckystar), spanText.Length() - 1, spanText.Length(), SpanTypes.InclusiveExclusive);
+                    spanText.SetSpan(new CenteredImageSpan(this.ApplicationContext, Resource.Drawable.luckystar), spanText.Length() - 1, spanText.Length(), SpanTypes.InclusiveExclusive);
 
                     txtBody.SetText(spanText, TextView.BufferType.Spannable);
                 }

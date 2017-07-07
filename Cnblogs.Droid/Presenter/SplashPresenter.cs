@@ -14,14 +14,17 @@ using Newtonsoft.Json;
 using Cnblogs.Droid.Utils;
 using Cnblogs.Droid.Model;
 using Cnblogs.Droid.UI.Views;
+using Cnblogs.Droid.UI.Shareds;
 
 namespace Cnblogs.Droid.Presenter
 {
     public class SplashPresenter : ISplashPresenter
     {
         private ISplashView splashView;
-        public SplashPresenter(ISplashView splashView)
+        private Context context;
+        public SplashPresenter(Context context, ISplashView splashView)
         {
+            this.context = context;
             this.splashView = splashView;
         }
         public void GetAccessToken(AccessToken token, string basic)
@@ -40,28 +43,19 @@ namespace Cnblogs.Droid.Presenter
                      {
                          token = JsonConvert.DeserializeObject<AccessToken>(body);
                          token.RefreshTime = DateTime.Now;
-                         splashView.GetAccessTokenSuccess(token);
+
+                         TokenShared.Update(context, token);
                      }
                      else
                      {
-                         try
-                         {
-                             var error = JsonConvert.DeserializeObject<ErrorMessage>(body);
-                             splashView.GetAccessTokenFail(error.Message);
-                         }
-                         catch (Exception e)
-                         {
-                             splashView.GetAccessTokenFail(e.Message);
-                         }
+                         TokenShared.Update(context, new AccessToken());
                      }
                  }, (call, ex) =>
                  {
-                     splashView.GetAccessTokenFail(ex.Message);
                  });
             }
             catch (Exception ex)
             {
-                splashView.GetAccessTokenFail(ex.Message);
             }
         }
     }

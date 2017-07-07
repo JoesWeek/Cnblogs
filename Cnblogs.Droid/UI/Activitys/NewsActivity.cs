@@ -25,7 +25,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Cnblogs.Droid.UI.Activitys
 {
     [Activity(Label = "@string/news", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
-    public class NewsActivity : BaseActivity, INewsBodyView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener, IShareBoardlistener
+    public class NewsActivity : BaseActivity, INewsBodyView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener
     {
         private int Id;
         private INewsBodyPresenter newsPresenter;
@@ -42,7 +42,7 @@ namespace Cnblogs.Droid.UI.Activitys
         private TextView txtBookmark;
 
         private NewsModel news;
-        private ShareAction shareAction;
+        private UMengSharesWidget sharesWidget;
         protected override int LayoutResource => Resource.Layout.news;
         public static void Start(Context context, int id)
         {
@@ -100,7 +100,7 @@ namespace Cnblogs.Droid.UI.Activitys
                 await newsPresenter.GetClientNews(Id);
             });
 
-            shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
+            sharesWidget = new UMengSharesWidget(this);
         }
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -111,7 +111,7 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             if (news != null)
             {
-                shareAction.Open();
+                sharesWidget.Open("https://news.cnblogs.com/n/" + news.Id + "/", news.Title,news.TopicIcon);
             }
             return true;
         }
@@ -122,7 +122,7 @@ namespace Cnblogs.Droid.UI.Activitys
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
-            shareAction.Close();
+            sharesWidget.Close();
         }
         public async void OnRefresh()
         {
@@ -199,22 +199,6 @@ namespace Cnblogs.Droid.UI.Activitys
         public void OnClick(View v)
         {
             ActivityCompat.FinishAfterTransition(this);
-        }
-        public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
-        {
-            var icon = news.TopicIcon;
-            if (icon.IndexOf("https://") == -1)
-            {
-                icon = "https:" + icon;
-            }
-            UMWeb web = new UMWeb("https://news.cnblogs.com/n/" + news.Id + "/");
-            web.Title = news.Title;
-            web.Description = news.Summary;
-            web.SetThumb(new UMImage(this, icon));
-            new ShareAction(this).WithMedia(web)
-                    .SetPlatform(media)
-                    .SetCallback(new UMengCustomShare(this))
-                    .Share();
         }
     }
 }

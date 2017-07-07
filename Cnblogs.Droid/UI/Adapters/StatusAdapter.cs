@@ -7,6 +7,7 @@ using Cnblogs.Droid.UI.Activitys;
 using Cnblogs.Droid.UI.Listeners;
 using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
+using Com.Umeng.Analytics;
 using Square.Picasso;
 using System;
 
@@ -86,7 +87,16 @@ namespace Cnblogs.Droid.UI.Adapters
             {
                 var Content = "\u3000" + model.Content + " ";
                 var spanText = new SpannableString(Html.FromHtml(Content));
-                spanText.SetSpan(new CenteredImageSpan(context, Resource.Drawable.luckystar), spanText.Length() - 1, spanText.Length(), SpanTypes.InclusiveExclusive);
+                try
+                {
+                    var imageSpan = new CenteredImageSpan(context, Resource.Drawable.luckystar);
+                    spanText.SetSpan(imageSpan, spanText.Length() - 1, spanText.Length(), SpanTypes.InclusiveExclusive);
+                }
+                catch (Exception ex)
+                {
+                    MobclickAgent.ReportError(context, ex.Message);
+                    spanText.SetSpan(context, spanText.Length() - 1, spanText.Length(), SpanTypes.InclusiveExclusive);
+                }
 
                 content.SetText(spanText, TextView.BufferType.Spannable);
             }

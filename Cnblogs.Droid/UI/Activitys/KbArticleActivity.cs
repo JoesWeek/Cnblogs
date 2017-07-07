@@ -26,7 +26,7 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Cnblogs.Droid.UI.Activitys
 {
     [Activity(Label = "@string/news", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
-    public class KbArticleActivity : BaseActivity, IKbArticleView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener, IShareBoardlistener
+    public class KbArticleActivity : BaseActivity, IKbArticleView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener
     {
         private int Id;
         private IKbArticlePresenter kbarticlePresenter;
@@ -43,7 +43,7 @@ namespace Cnblogs.Droid.UI.Activitys
         private TextView txtBookmark;
 
         private KbArticlesModel kbarticle;
-        private ShareAction shareAction;
+        private UMengSharesWidget sharesWidget;
         protected override int LayoutResource => Resource.Layout.news;
         public static void Start(Context context, int id)
         {
@@ -100,7 +100,7 @@ namespace Cnblogs.Droid.UI.Activitys
             {
                 await kbarticlePresenter.GetClientKbArticle(Id);
             });
-            shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
+            sharesWidget = new UMengSharesWidget(this);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -112,7 +112,7 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             if (kbarticle != null)
             {
-                shareAction.Open();
+                sharesWidget.Open("http://kb.cnblogs.com/page/" + kbarticle.Id + "/", kbarticle.Title);
             }
             return true;
         }
@@ -123,7 +123,7 @@ namespace Cnblogs.Droid.UI.Activitys
         public override void OnConfigurationChanged(Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
-            shareAction.Close();
+            sharesWidget.Close();
         }
         public async void OnRefresh()
         {
@@ -150,7 +150,7 @@ namespace Cnblogs.Droid.UI.Activitys
             };
             (txtBookmark.Parent as FrameLayout).Click += delegate
             {
-                var linkurl = "http://kb.cnblogs.com/page/"+ kbarticle.Id + "/";
+                var linkurl = "http://kb.cnblogs.com/page/" + kbarticle.Id + "/";
                 var title = kbarticle.Title + "_ÖªÊ¶¿â_²©¿ÍÔ°";
                 BookmarkAddActivity.Start(this, linkurl, title, true);
             };
@@ -200,16 +200,6 @@ namespace Cnblogs.Droid.UI.Activitys
         public void OnClick(View v)
         {
             ActivityCompat.FinishAfterTransition(this);
-        }
-        public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
-        {
-            UMWeb web = new UMWeb("http://kb.cnblogs.com/page/" + kbarticle.Id + "/");
-            web.Title = kbarticle.Title;
-            web.Description = kbarticle.Summary;
-            new ShareAction(this).WithMedia(web)
-                    .SetPlatform(media)
-                    .SetCallback(new UMengCustomShare(this))
-                    .Share();
         }
     }
 }

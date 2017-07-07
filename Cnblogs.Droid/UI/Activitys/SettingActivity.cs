@@ -1,5 +1,6 @@
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
@@ -17,6 +18,7 @@ namespace Cnblogs.Droid.UI.Activitys
     {
         private Handler handler;
         private Toolbar toolbar;
+        private UMengSharesWidget sharesWidget;
 
         protected override int LayoutResource => Resource.Layout.setting;
         public static void Start(Context context)
@@ -56,11 +58,18 @@ namespace Cnblogs.Droid.UI.Activitys
             };
             FindViewById<LinearLayout>(Resource.Id.layoutOpenSourceUrl).Click += (object sender, EventArgs e) =>
             {
-                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(Resources.GetString(Resource.String.open_source_url)));
-                intent.SetClassName("com.android.browser", "com.android.browser.BrowserActivity");
-                intent.AddFlags(ActivityFlags.NewTask);
-                StartActivity(intent);
+                sharesWidget.Open(Resources.GetString(Resource.String.open_source_url), "博客园第三方Android客户端，Xamarin App，Material Design风格");
             };
+            sharesWidget = new UMengSharesWidget(this);
+        }
+        /// <summary>
+        /// 屏幕横竖屏切换时避免出现window leak的问题
+        /// </summary>
+        /// <param name="newConfig"></param>
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+            sharesWidget.Close();
         }
 
         public void OnClick(View v)

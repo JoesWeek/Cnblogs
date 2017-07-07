@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--需要申请开通open api调用权限，获取ClientId和ClientSercret-->
-  <string name="survey_email"></string>
-  <string name="ClientId"></string>
-  <string name="ClientSercret"></string>
-  <string name="PublicKey"></string>
+  <string name="survey_email">476920650@qq.com</string>
+  <string name="ClientId">cda7b086-4cdf-4aaf-bde5-2aefabefa828</string>
+  <string name="ClientSercret">E9xR1T6fMb8WJ8fqr3AXMuSrAHUfD4Tgo6MxlArBF5o_XxVK9IWmC498PyM03aAZILhhYHTwgszFFmAk</string>
+  <string name="PublicKey">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCp0wHYbg/NOPO3nzMD3dndwS0MccuMeXCHgVlGOoYyFwLdS24Im2e7YyhB0wrUsyYf0/nhzCzBK8ZC9eCWqd0aHbdgOQT6CuFQBMjbyGYvlVYU2ZP7kG9Ft6YV6oc9ambuO7nPZh+bvXH0zDKfi02prknrScAKC0XhadTHT3Al0QIDAQAB</string>
 
   <string name="AppName">博客园</string>
   <string name="AppTitle">—  代码改变世界  —</string>
@@ -128,4 +128,5 @@
   <string name="client_error">未设置ClientId或ClientSercret</string>
   <string name="publicKey_error">未设置PublicKey</string>
 
+    <string name="umeng_sharebutton_copy">浏览器打开</string>
 </resources>

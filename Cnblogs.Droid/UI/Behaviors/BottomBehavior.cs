@@ -123,11 +123,6 @@ namespace Cnblogs.Droid.UI.Behaviors
         {
             return base.OnApplyWindowInsets(coordinatorLayout, child, insets);
         }
-
-        public override Android.OS.IParcelable OnSaveInstanceState(CoordinatorLayout parent, Java.Lang.Object child)
-        {
-            return base.OnSaveInstanceState(parent, child);
-        }
         #endregion
     }
 }

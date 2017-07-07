@@ -1,5 +1,6 @@
 using Android.Content;
 using Android.Widget;
+using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
 
 namespace Cnblogs.Droid.UI.Activitys

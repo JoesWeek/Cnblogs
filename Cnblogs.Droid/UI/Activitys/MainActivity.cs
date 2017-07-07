@@ -30,7 +30,7 @@ using Com.Umeng.Socialize.Media;
 namespace Cnblogs.Droid
 {
     [Activity(LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
-    public class MainActivity : BaseActivity, DrawerLayout.IDrawerListener, NavigationView.IOnNavigationItemSelectedListener, View.IOnClickListener, Toolbar.IOnMenuItemClickListener, IFlytekUpdateListener, IShareBoardlistener
+    public class MainActivity : BaseActivity, DrawerLayout.IDrawerListener, NavigationView.IOnNavigationItemSelectedListener, View.IOnClickListener, Toolbar.IOnMenuItemClickListener, IFlytekUpdateListener
     {
         private Handler handler;
         private CoordinatorLayout coordinatorLayout;
@@ -53,7 +53,7 @@ namespace Cnblogs.Droid
         // 首次按下返回键时间戳
         private DateTime firstBackPressedTime = DateTime.MinValue;
         private IFlytekUpdate updManager;
-        private ShareAction shareAction;
+        private UMengSharesWidget sharesWidget;
 
         protected override int LayoutResource => Resource.Layout.Main;
         public static void Start(Context context)
@@ -110,10 +110,10 @@ namespace Cnblogs.Droid
             updManager.SetParameter(UpdateConstants.ExtraStyle, UpdateConstants.UpdateUiDialog);
             updManager.AutoUpdate(this, this);
 
-            shareAction = new ShareAction(this).SetDisplayList(SHARE_MEDIA.Weixin, SHARE_MEDIA.WeixinCircle, SHARE_MEDIA.WeixinFavorite, SHARE_MEDIA.Sina).SetShareboardclickCallback(this);
+            sharesWidget = new UMengSharesWidget(this);
 
         }
-        
+
         #region DrawerLayout
         protected override void OnPostCreate(Bundle savedInstanceState)
         {
@@ -128,7 +128,7 @@ namespace Cnblogs.Droid
         {
             base.OnConfigurationChanged(newConfig);
             drawerToggle.OnConfigurationChanged(newConfig);
-            shareAction.Close();
+            sharesWidget.Close();
         }
         public void OnDrawerClosed(View drawerView)
         {
@@ -170,7 +170,7 @@ namespace Cnblogs.Droid
                         SettingActivity.Start(this);
                         break;
                     case Resource.Id.Share:
-                        shareAction.Open();
+                        sharesWidget.Open(Resources.GetString(Resource.String.open_source_url), Resources.GetString(Resource.String.share_title), Resource.Mipmap.ic_launcher);
                         break;
                     default:
                         SwitchNavigationBar(menuItem.ItemId);
@@ -408,7 +408,14 @@ namespace Cnblogs.Droid
                     else
                     {
                         var user = await SQLiteUtils.Instance().QueryUser();
-                        BlogActivity.Start(this, user.BlogApp);
+                        if (string.IsNullOrEmpty(user.BlogApp))
+                        {
+                            Toast.MakeText(this, "未开通博客", ToastLength.Short).Show();
+                        }
+                        else
+                        {
+                            BlogActivity.Start(this, user.BlogApp);
+                        }
                     }
                     break;
             }
@@ -435,36 +442,33 @@ namespace Cnblogs.Droid
                 }
             }
         }
-        public void UpdateUserView()
+        public async void UpdateUserView()
         {
-            handler.Post(async () =>
+            if (LoginUtils.Instance(this).GetLoginStatus())
             {
-                if (LoginUtils.Instance(this).GetLoginStatus())
-                {
-                    var user = await LoginUtils.Instance(this).GetUser();
-                    Author.Text = user.DisplayName;
-                    Seniority.Text = Resources.GetString(Resource.String.seniority) + "：" + user.Seniority;
-                    txtLogout.Visibility = ViewStates.Visible;
-                    Picasso.With(this)
-                                .Load(user.Avatar)
-                                .Placeholder(Resource.Drawable.placeholder)
-                                .Error(Resource.Drawable.placeholder)
-                                .Transform(new CircleTransform())
-                                .Into(Avatar);
-                }
-                else
-                {
-                    Author.Text = Resources.GetString(Resource.String.need_login);
-                    Seniority.Text = "";
-                    txtLogout.Visibility = ViewStates.Gone;
-                    Picasso.With(this)
-                                .Load(Resource.Drawable.placeholder)
-                                .Placeholder(Resource.Drawable.placeholder)
-                                .Error(Resource.Drawable.placeholder)
-                                .Transform(new CircleTransform())
-                                .Into(Avatar);
-                }
-            });
+                var user = await LoginUtils.Instance(this).GetUser();
+                Author.Text = user.DisplayName;
+                Seniority.Text = Resources.GetString(Resource.String.seniority) + "：" + user.Seniority;
+                txtLogout.Visibility = ViewStates.Visible;
+                Picasso.With(this)
+                            .Load(user.Avatar)
+                            .Placeholder(Resource.Drawable.placeholder)
+                            .Error(Resource.Drawable.placeholder)
+                            .Transform(new CircleTransform())
+                            .Into(Avatar);
+            }
+            else
+            {
+                Author.Text = Resources.GetString(Resource.String.need_login);
+                Seniority.Text = "";
+                txtLogout.Visibility = ViewStates.Gone;
+                Picasso.With(this)
+                            .Load(Resource.Drawable.placeholder)
+                            .Placeholder(Resource.Drawable.placeholder)
+                            .Error(Resource.Drawable.placeholder)
+                            .Transform(new CircleTransform())
+                            .Into(Avatar);
+            }
         }
         public override void OnBackPressed()
         {
@@ -527,18 +531,6 @@ namespace Cnblogs.Droid
                     updManager.ShowUpdateInfo(this, result);
                 }
             });
-        }
-
-        public void Onclick(SnsPlatform snsPlatform, SHARE_MEDIA media)
-        {
-            UMWeb web = new UMWeb(Resources.GetString(Resource.String.open_source_url));
-            web.Title = Resources.GetString(Resource.String.share_title);
-            web.Description = Resources.GetString(Resource.String.share_title);
-            web.SetThumb(new UMImage(this, Resource.Mipmap.ic_launcher));
-            new ShareAction(this).WithMedia(web)
-                    .SetPlatform(media)
-                    .SetCallback(new UMengCustomShare(this))
-                    .Share();
         }
     }
 }
