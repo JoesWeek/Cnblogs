@@ -51,7 +51,7 @@ namespace Cnblogs.Droid.UI.Adapters
             }
             if (model.QuestionUserInfo != null && model.QuestionUserInfo.UserID > 0)
             {
-                (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = Html.FromHtml(model.QuestionUserInfo.UserName).ToString();
+                (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = HtmlUtils.GetHtml(model.QuestionUserInfo.UserName).ToString();
                 try
                 {
                     Picasso.With(context)

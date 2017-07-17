@@ -145,8 +145,8 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             handler.Post(() =>
             {
-                toolbar.Title = Html.FromHtml(model.UserDisplayName).ToString() + "µÄÉÁ´æ";
-                userName.Text = Html.FromHtml(model.UserDisplayName).ToString();
+                toolbar.Title = HtmlUtils.GetHtml(model.UserDisplayName).ToString() + "µÄÉÁ´æ";
+                userName.Text = HtmlUtils.GetHtml(model.UserDisplayName).ToString();
                 txtPostdate.Text = DateTimeUtils.CommonTime(Convert.ToDateTime(model.DateAdded));
                 if (model.CommentCount > 0)
                     commentCount.Text = model.CommentCount + " " + Resources.GetString(Resource.String.comment);
@@ -172,14 +172,14 @@ namespace Cnblogs.Droid.UI.Activitys
                 if (model.IsLucky)
                 {
                     var Content = model.Content + " ";
-                    var spanText = new SpannableString(Html.FromHtml(Content));
+                    var spanText = new SpannableString(HtmlUtils.GetHtml(Content));
                     spanText.SetSpan(new CenteredImageSpan(this.ApplicationContext, Resource.Drawable.luckystar), spanText.Length() - 1, spanText.Length(), SpanTypes.InclusiveExclusive);
 
                     txtBody.SetText(spanText, TextView.BufferType.Spannable);
                 }
                 else
                 {
-                    txtBody.SetText(Html.FromHtml(model.Content), TextView.BufferType.Spannable);
+                    txtBody.SetText(HtmlUtils.GetHtml(model.Content), TextView.BufferType.Spannable);
                 }
                 try
                 {

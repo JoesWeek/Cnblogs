@@ -260,7 +260,7 @@ namespace Cnblogs.Droid.UI.Activitys
                 }
                 if (question.QuestionUserInfo != null && question.QuestionUserInfo.UserID > 0)
                 {
-                    txtUserName.Text = Html.FromHtml(question.QuestionUserInfo.UserName).ToString();
+                    txtUserName.Text = HtmlUtils.GetHtml(question.QuestionUserInfo.UserName).ToString();
                     txtScore.Text = HtmlUtils.GetScoreName(question.QuestionUserInfo.QScore) + " ¡¤ " + question.QuestionUserInfo.QScore + "Ô°¶¹ ¡¤ ";
                     try
                     {

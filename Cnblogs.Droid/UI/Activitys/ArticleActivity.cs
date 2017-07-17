@@ -102,7 +102,7 @@ namespace Cnblogs.Droid.UI.Activitys
             {
                 await articlePresenter.GetClientArticle(Id);
             });
-            
+
             sharesWidget = new UMengSharesWidget(this);
         }
 
@@ -115,7 +115,7 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             if (article != null)
             {
-                sharesWidget.Open(article.Url,article.Title);
+                sharesWidget.Open(article.Url, article.Title);
             }
             return true;
         }
@@ -135,54 +135,61 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void GetClientArticleSuccess(ArticlesModel model)
         {
-            handler.Post(() =>
+            if (model != null)
             {
-                article = model;
-                txtTitle.Text = article.Title;
-                txtAuthor.Text = Html.FromHtml(article.Author).ToString();
-                txtPostdate.Text = DateTimeUtils.CommonTime(article.PostDate);
+                handler.Post(() =>
+                {
+                    article = model;
+                    txtTitle.Text = article.Title;
+                    txtAuthor.Text = HtmlUtils.GetHtml(article.Author).ToString();
+                    txtPostdate.Text = DateTimeUtils.CommonTime(article.PostDate);
 
-                if (article.DiggCount > 0)
-                    txtDigg.Text = article.DiggCount.ToString();
-                if (article.ViewCount > 0)
-                    txtRead.Text = article.ViewCount.ToString();
-                if (article.CommentCount > 0)
-                {
-                    txtComments.Text = article.CommentCount.ToString();
-                }
-                (txtComments.Parent as FrameLayout).Click += delegate
-                {
-                    ArticleCommentsActivity.Start(this, article.BlogApp, article.Id);
-                };
-                (txtBookmark.Parent as FrameLayout).Click += delegate
-                {
-                    var linkurl = article.Url;
-                    var title = article.Title + " - " + article.Author + " - ²©¿ÍÔ°";
-                    BookmarkAddActivity.Start(this, linkurl, title, true);
-                };
+                    if (article.DiggCount > 0)
+                        txtDigg.Text = article.DiggCount.ToString();
+                    if (article.ViewCount > 0)
+                        txtRead.Text = article.ViewCount.ToString();
+                    if (article.CommentCount > 0)
+                    {
+                        txtComments.Text = article.CommentCount.ToString();
+                    }
+                    (txtComments.Parent as FrameLayout).Click += delegate
+                    {
+                        ArticleCommentsActivity.Start(this, article.BlogApp, article.Id);
+                    };
+                    (txtBookmark.Parent as FrameLayout).Click += delegate
+                    {
+                        var linkurl = article.Url;
+                        var title = article.Title + " - " + article.Author + " - ²©¿ÍÔ°";
+                        BookmarkAddActivity.Start(this, linkurl, title, true);
+                    };
 
-                if (article.Body == null || article.Body == "")
-                {
-                    OnRefresh();
-                }
-                else
-                {
-                    GetServiceArticleSuccess(model);
-                }
-                try
-                {
-                    Picasso.With(this)
-                                .Load(article.Avatar)
-                                .Placeholder(Resource.Drawable.placeholder)
-                                .Error(Resource.Drawable.placeholder)
-                                .Transform(new CircleTransform())
-                                .Into(imgAvatar);
-                }
-                catch (Exception)
-                {
+                    if (article.Body == null || article.Body == "")
+                    {
+                        OnRefresh();
+                    }
+                    else
+                    {
+                        GetServiceArticleSuccess(model);
+                    }
+                    try
+                    {
+                        Picasso.With(this)
+                                    .Load(article.Avatar)
+                                    .Placeholder(Resource.Drawable.placeholder)
+                                    .Error(Resource.Drawable.placeholder)
+                                    .Transform(new CircleTransform())
+                                    .Into(imgAvatar);
+                    }
+                    catch (Exception)
+                    {
 
-                }
-            });
+                    }
+                });
+            }
+            else
+            {
+                OnRefresh();
+            }
         }
         public void GetServiceArticleFail(string msg)
         {
@@ -194,17 +201,20 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void GetServiceArticleSuccess(ArticlesModel model)
         {
-            handler.Post(() =>
+            if (model != null)
             {
-                article = model;
-                if (swipeRefreshLayout.Refreshing)
+                handler.Post(() =>
                 {
-                    swipeRefreshLayout.Refreshing = false;
-                }
-                var content = HtmlUtils.ReadHtml(Assets);
-                var body = HtmlUtils.ReplaceHtml(model.Body).Trim('"');
-                txtBody.LoadDataWithBaseURL("file:///android_asset/", content.Replace("#title#", "").Replace("#body#", body), "text/html", "utf-8", null);
-            });
+                    article = model;
+                    if (swipeRefreshLayout.Refreshing)
+                    {
+                        swipeRefreshLayout.Refreshing = false;
+                    }
+                    var content = HtmlUtils.ReadHtml(Assets);
+                    var body = HtmlUtils.ReplaceHtml(model.Body).Trim('"');
+                    txtBody.LoadDataWithBaseURL("file:///android_asset/", content.Replace("#title#", "").Replace("#body#", body), "text/html", "utf-8", null);
+                });
+            }
         }
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {

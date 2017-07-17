@@ -8,4 +8,7 @@
   <dimen name="sp_12">12sp</dimen>
   <dimen name="sp_14">14sp</dimen>
   <dimen name="sp_16">16sp</dimen>
+  
+  <dimen name="search_icon_padding">12dp</dimen>
+  <dimen name="search_view_text_padding">60dp</dimen>
 </resources>

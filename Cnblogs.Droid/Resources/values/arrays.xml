@@ -25,4 +25,10 @@
     <item>@string/question_solved</item>
     <item>@string/question_myquestion</item>
   </string-array>
+  <string-array name="SearchTabs">
+    <item>@string/articlehome</item>
+    <item>@string/news</item>
+    <item>@string/kbArticles</item>
+    <item>@string/question</item>
+  </string-array>
 </resources>

@@ -23,8 +23,8 @@ namespace Cnblogs.Droid.UI.Adapters
             var baseHolder = holder as BaseAdapter.BaseViewHolder;
             var itemview = baseHolder.GetConvertView();
             itemview.Tag = model.CommentID.ToString();
-            (baseHolder.GetView(Resource.Id.username) as TextView).Text = Html.FromHtml(model.UserName).ToString();
-            (baseHolder.GetView(Resource.Id.comment) as TextView).Text = Html.FromHtml(model.CommentContent).ToString();
+            (baseHolder.GetView(Resource.Id.username) as TextView).Text = HtmlUtils.GetHtml(model.UserName).ToString();
+            (baseHolder.GetView(Resource.Id.comment) as TextView).Text = HtmlUtils.GetHtml(model.CommentContent).ToString();
             (baseHolder.GetView(Resource.Id.dateAdded) as TextView).Text = DateTimeUtils.CommonTime(model.DateAdded);
             (baseHolder.GetView(Resource.Id.floor) as TextView).Text = model.Floor + context.Resources.GetString(Resource.String.floor1);
             if (model.AgreeCount > 0)

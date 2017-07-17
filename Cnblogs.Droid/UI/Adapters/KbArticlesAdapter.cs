@@ -29,7 +29,7 @@ namespace Cnblogs.Droid.UI.Adapters
             Title.Text = model.Title;
             if (model.Author != null)
             {
-                Title.Text += " - " + Html.FromHtml(model.Author).ToString();
+                Title.Text += " - " + HtmlUtils.GetHtml(model.Author).ToString();
             }
         }
         public new void OnClick(View v)

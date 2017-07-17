@@ -56,6 +56,10 @@ namespace Cnblogs.Droid.UI.Activitys
                     Toast.MakeText(this, "系统中没有安装邮件客户端", ToastLength.Short).Show();
                 }
             };
+            FindViewById<LinearLayout>(Resource.Id.layoutQQ).Click += (object sender, EventArgs e) =>
+            {
+                sharesWidget.Open("http://shang.qq.com/wpa/qunwpa?idkey=5c281d37638467fb0f411484dcd513b89ba82b58decb8518cc2523b95232dd9b", "博客园第三方APP开发交流群");
+            };
             FindViewById<LinearLayout>(Resource.Id.layoutOpenSourceUrl).Click += (object sender, EventArgs e) =>
             {
                 sharesWidget.Open(Resources.GetString(Resource.String.open_source_url), "博客园第三方Android客户端，Xamarin App，Material Design风格");

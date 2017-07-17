@@ -28,6 +28,8 @@ namespace Cnblogs.Droid.UI.Fragments
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
+            this.HasOptionsMenu = true;
+
             viewPager = view.FindViewById<ViewPager>(Resource.Id.viewPager);
             viewPager.OffscreenPageLimit = 2;
 
@@ -43,7 +45,7 @@ namespace Cnblogs.Droid.UI.Fragments
                 adapter.OnRefresh(0);
             });
         }
-        
+
         public void OnTabReselected(TabLayout.Tab tab)
         {
         }
@@ -56,6 +58,10 @@ namespace Cnblogs.Droid.UI.Fragments
 
         public void OnTabUnselected(TabLayout.Tab tab)
         {
+        }
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.search, menu);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Cnblogs.Droid.UI.Shareds
         private const string KeyTokenType = "token_type";
         private const string KeyExpiresIn = "expires_in";
         private const string KeyIsIdentityUser = "IsIdentityUser";
+        private const string KeyRefreshToken = "refresh_token";
         private const string KeyRefreshTime = "RefreshTime";
 
         public static void Update(Context context, AccessToken token)
@@ -29,6 +30,7 @@ namespace Cnblogs.Droid.UI.Shareds
             BaseShared.Instance(context, Tag).SetString(KeyTokenType, token.token_type);
             BaseShared.Instance(context, Tag).SetInt(KeyExpiresIn, token.expires_in);
             BaseShared.Instance(context, Tag).SetBool(KeyIsIdentityUser, token.IsIdentityUser);
+            BaseShared.Instance(context, Tag).SetString(KeyRefreshToken, token.refresh_token);
             BaseShared.Instance(context, Tag).SetDateTime(KeyRefreshTime, token.RefreshTime);
         }
         public static AccessToken GetAccessToken(Context context)
@@ -39,6 +41,7 @@ namespace Cnblogs.Droid.UI.Shareds
                 token_type = BaseShared.Instance(context, Tag).GetString(KeyTokenType, ""),
                 expires_in = BaseShared.Instance(context, Tag).GetInt(KeyExpiresIn, 0),
                 IsIdentityUser = BaseShared.Instance(context, Tag).GetBool(KeyIsIdentityUser, false),
+                refresh_token = BaseShared.Instance(context, Tag).GetString(KeyRefreshToken, ""),
                 RefreshTime = BaseShared.Instance(context, Tag).GetDateTime(KeyRefreshTime),
             };
         }

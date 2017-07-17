@@ -1,16 +1,13 @@
+using Android.Content;
+using Cnblogs.Droid.Model;
+using Com.Umeng.Analytics;
+using Java.Net;
+using Java.Util.Concurrent;
+using Square.OkHttp3;
 using System;
 using System.Collections.Generic;
-using Square.OkHttp3;
-using Java.Util.Concurrent;
-using Java.Net;
-using System.Threading.Tasks;
-using Cnblogs.Droid.Model;
 using System.Text;
-using System.Security.Authentication;
-using System.Net.Http;
-using Com.Umeng.Socialize.Utils;
-using Com.Umeng.Analytics;
-using Android.Content;
+using System.Threading.Tasks;
 
 namespace Cnblogs.Droid.Utils
 {

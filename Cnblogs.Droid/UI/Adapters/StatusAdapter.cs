@@ -28,7 +28,7 @@ namespace Cnblogs.Droid.UI.Adapters
             linearLayout.SetOnClickListener(this);
             var txtDesc = (baseHolder.GetView(Resource.Id.txtDesc) as TextView);
             var txtParentCommentContent = (baseHolder.GetView(Resource.Id.txtParentCommentContent) as TextView);
-            (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = Html.FromHtml(model.UserDisplayName).ToString();
+            (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = HtmlUtils.GetHtml(model.UserDisplayName).ToString();
             (baseHolder.GetView(Resource.Id.txtPostdate) as TextView).Text = DateTimeUtils.CommonTime(Convert.ToDateTime(model.DateAdded));
             var commentCount = (baseHolder.GetView(Resource.Id.txtCommentCount) as TextView);
             if (model.CommentCount > 0)
@@ -55,7 +55,7 @@ namespace Cnblogs.Droid.UI.Adapters
                 commentCount.Visibility = ViewStates.Gone;
                 txtDesc.Text = "回复了您的评论";
                 txtParentCommentContent.Visibility = ViewStates.Visible;
-                txtParentCommentContent.SetText(Html.FromHtml(model.ParentCommentContent), TextView.BufferType.Spannable);
+                txtParentCommentContent.SetText(HtmlUtils.GetHtml(model.ParentCommentContent), TextView.BufferType.Spannable);
             }
             else
             {
@@ -86,7 +86,7 @@ namespace Cnblogs.Droid.UI.Adapters
             if (model.IsLucky)
             {
                 var Content = "\u3000" + model.Content + " ";
-                var spanText = new SpannableString(Html.FromHtml(Content));
+                var spanText = new SpannableString(HtmlUtils.GetHtml(Content));
                 try
                 {
                     var imageSpan = new CenteredImageSpan(context, Resource.Drawable.luckystar);
@@ -102,7 +102,7 @@ namespace Cnblogs.Droid.UI.Adapters
             }
             else
             {
-                content.SetText(Html.FromHtml("\u3000" + model.Content), TextView.BufferType.Spannable);
+                content.SetText(HtmlUtils.GetHtml(model.Content), TextView.BufferType.Spannable);
             }
             try
             {

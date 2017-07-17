@@ -17,8 +17,8 @@ namespace Cnblogs.Droid.UI.Adapters
         protected override void ConvertAsync(RecyclerView.ViewHolder holder, ArticleCommentModel model)
         {
             var baseHolder = holder as BaseAdapter.BaseViewHolder;
-            (baseHolder.GetView(Resource.Id.author) as TextView).Text = Html.FromHtml(model.Author).ToString();
-            (baseHolder.GetView(Resource.Id.body) as TextView).Text = Html.FromHtml(model.Body).ToString();
+            (baseHolder.GetView(Resource.Id.author) as TextView).Text = HtmlUtils.GetHtml(model.Author).ToString();
+            (baseHolder.GetView(Resource.Id.body) as TextView).Text = HtmlUtils.GetHtml(model.Body).ToString();
             (baseHolder.GetView(Resource.Id.createAt) as TextView).Text = DateTimeUtils.CommonTime(Convert.ToDateTime(model.DateAdded));
             (baseHolder.GetView(Resource.Id.floor) as TextView).Text = model.Floor + context.Resources.GetString(Resource.String.floor1);
             try

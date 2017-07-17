@@ -76,6 +76,30 @@
             <View
                 style="@style/LineStyle" />
             <LinearLayout
+                android:id="@+id/layoutQQ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundGeneral">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="开发交流"
+                    android:textColor="@color/title_color"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="欢迎加入开发QQ群：181050206"
+                    android:textColor="@color/subtitle_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <View
+                style="@style/LineStyle" />
+            <LinearLayout
                 android:id="@+id/layoutOpenSourceUrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

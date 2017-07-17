@@ -17,15 +17,11 @@ using Cnblogs.Droid.UI.Views;
 using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
 using Com.Umeng.Socialize;
-using Com.Umeng.Socialize.Bean;
-using Com.Umeng.Socialize.Media;
-using Com.Umeng.Socialize.Shareboard;
-using Com.Umeng.Socialize.Utils;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Cnblogs.Droid.UI.Activitys
 {
-    [Activity(Label = "@string/news", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
+    [Activity(Label = "@string/kbArticles", LaunchMode = Android.Content.PM.LaunchMode.SingleTask)]
     public class KbArticleActivity : BaseActivity, IKbArticleView, View.IOnClickListener, SwipeRefreshLayout.IOnRefreshListener, Toolbar.IOnMenuItemClickListener
     {
         private int Id;
@@ -132,36 +128,39 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void GetClientKbArticleSuccess(KbArticlesModel model)
         {
-            kbarticle = model;
-            toolbar.Title = model.Title;
-            if (model.Author != null)
+            if (model != null)
             {
-                toolbar.Title += " - " + Html.FromHtml(model.Author).ToString();
-            }
-            txtPostdate.Text = "发布于：" + DateTimeUtils.CommonTime(kbarticle.DateAdded);
+                kbarticle = model;
+                toolbar.Title = model.Title;
+                if (model.Author != null)
+                {
+                    toolbar.Title += " - " + HtmlUtils.GetHtml(model.Author).ToString();
+                }
+                txtPostdate.Text = "发布于：" + DateTimeUtils.CommonTime(kbarticle.DateAdded);
 
-            if (kbarticle.DiggCount > 0)
-                txtDigg.Text = kbarticle.DiggCount.ToString();
-            if (kbarticle.ViewCount > 0)
-                txtRead.Text = kbarticle.ViewCount.ToString();
-            (txtComments.Parent as FrameLayout).Click += delegate
-            {
-                Toast.MakeText(this, "很抱歉,暂未开放此功能。", ToastLength.Short).Show();
-            };
-            (txtBookmark.Parent as FrameLayout).Click += delegate
-            {
-                var linkurl = "http://kb.cnblogs.com/page/" + kbarticle.Id + "/";
-                var title = kbarticle.Title + "_知识库_博客园";
-                BookmarkAddActivity.Start(this, linkurl, title, true);
-            };
+                if (kbarticle.DiggCount > 0)
+                    txtDigg.Text = kbarticle.DiggCount.ToString();
+                if (kbarticle.ViewCount > 0)
+                    txtRead.Text = kbarticle.ViewCount.ToString();
+                (txtComments.Parent as FrameLayout).Click += delegate
+                {
+                    Toast.MakeText(this, "很抱歉,暂未开放此功能。", ToastLength.Short).Show();
+                };
+                (txtBookmark.Parent as FrameLayout).Click += delegate
+                {
+                    var linkurl = "http://kb.cnblogs.com/page/" + kbarticle.Id + "/";
+                    var title = kbarticle.Title + "_知识库_博客园";
+                    BookmarkAddActivity.Start(this, linkurl, title, true);
+                };
 
-            if (kbarticle.Body == null || kbarticle.Body == "")
-            {
-                OnRefresh();
-            }
-            else
-            {
-                GetServiceKbArticleSuccess(model);
+                if (kbarticle.Body == null || kbarticle.Body == "")
+                {
+                    OnRefresh();
+                }
+                else
+                {
+                    GetServiceKbArticleSuccess(model);
+                }
             }
         }
 
@@ -176,21 +175,24 @@ namespace Cnblogs.Droid.UI.Activitys
 
         public void GetServiceKbArticleSuccess(KbArticlesModel model)
         {
-            handler.Post(() =>
+            if (model != null)
             {
-                if (swipeRefreshLayout.Refreshing)
+                handler.Post(() =>
                 {
-                    swipeRefreshLayout.Refreshing = false;
-                }
-                kbarticle = model;
-                if (swipeRefreshLayout.Refreshing)
-                {
-                    swipeRefreshLayout.Refreshing = false;
-                }
-                var content = HtmlUtils.ReadHtml(Assets);
-                var body = HtmlUtils.ReplaceHtml(model.Body).Trim('"');
-                txtBody.LoadDataWithBaseURL("file:///android_asset/", content.Replace("#title#", model.Title).Replace("#body#", body), "text/html", "utf-8", null);
-            });
+                    if (swipeRefreshLayout.Refreshing)
+                    {
+                        swipeRefreshLayout.Refreshing = false;
+                    }
+                    kbarticle = model;
+                    if (swipeRefreshLayout.Refreshing)
+                    {
+                        swipeRefreshLayout.Refreshing = false;
+                    }
+                    var content = HtmlUtils.ReadHtml(Assets);
+                    var body = HtmlUtils.ReplaceHtml(model.Body).Trim('"');
+                    txtBody.LoadDataWithBaseURL("file:///android_asset/", content.Replace("#title#", model.Title).Replace("#body#", body), "text/html", "utf-8", null);
+                });
+            }
         }
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible">
+    <View
+        android:id="@+id/transparent_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimary"
+        android:visibility="gone" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/search_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+            <ImageButton
+                android:id="@+id/action_up_btn"
+                style="@style/SearchImageButtonStyle"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back_24dp" />
+            <EditText
+                android:id="@+id/searchTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="搜索"
+                android:imeOptions="actionSearch"
+                android:inputType="textNoSuggestions"
+                android:paddingLeft="@dimen/search_view_text_padding"
+                android:paddingRight="@dimen/search_view_text_padding"
+                android:singleLine="true"
+                android:textColor="@color/gainsboro"
+                android:textColorHint="@color/subtitle_color"
+                android:textSize="16sp"
+                android:textCursorDrawable="@drawable/search_custom_cursor"
+                android:backgroundTint="@null" />
+            <ImageButton
+                android:id="@+id/action_empty_btn"
+                style="@style/SearchImageButtonStyle"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/close_24dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background" />
+    </LinearLayout>
+</FrameLayout>

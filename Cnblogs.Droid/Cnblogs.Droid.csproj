@@ -64,6 +64,9 @@
     <EnableProguard>False</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BottomNavigationBar, Version=1.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BottomNavigationBar.1.4.0.3\lib\MonoAndroid403\BottomNavigationBar.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
@@ -73,6 +76,9 @@
     </Reference>
     <Reference Include="PhotoViewBinding, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.PhotoView.Android.1.2.4\lib\PhotoViewBinding.dll</HintPath>
+    </Reference>
+    <Reference Include="SearchView.Xamarin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SearchView.Xamarin.1.0.0\lib\SearchView.Xamarin.dll</HintPath>
     </Reference>
     <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sqlite-net-pcl.1.3.3\lib\netstandard1.1\SQLite-net.dll</HintPath>
@@ -146,6 +152,10 @@
     <Reference Include="Xamarin.Android.Support.Transition, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Transition.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Transition.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\BottomNavigationBar-master\src\bottom-navigation-bar\bin\Debug\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
@@ -171,6 +181,7 @@
     <Compile Include="Model\QuestionAnswersModel.cs" />
     <Compile Include="Model\QuestionsModel.cs" />
     <Compile Include="Model\QuestionUserInfoModel.cs" />
+    <Compile Include="Model\SearchModel.cs" />
     <Compile Include="Model\StatusCommentModel.cs" />
     <Compile Include="Model\StatusModel.cs" />
     <Compile Include="Model\KbArticlesModel.cs" />
@@ -180,6 +191,8 @@
     <Compile Include="Model\ErrorMessage.cs" />
     <Compile Include="Model\NewsModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Presenter\ISearchColumnPresenter.cs" />
+    <Compile Include="Presenter\SearchColumnPresenter.cs" />
     <Compile Include="Presenter\BlogPresenter.cs" />
     <Compile Include="Presenter\BookmarkAddPresenter.cs" />
     <Compile Include="Presenter\IBlogPresenter.cs" />
@@ -235,6 +248,7 @@
     <Compile Include="UI\Activitys\BookmarkActivity.cs" />
     <Compile Include="UI\Activitys\BookmarkAddActivity.cs" />
     <Compile Include="UI\Activitys\PhotoActivity.cs" />
+    <Compile Include="UI\Activitys\SearchActivity.cs" />
     <Compile Include="UI\Activitys\SettingActivity.cs" />
     <Compile Include="UI\Activitys\QuestionAnswersActivity.cs" />
     <Compile Include="UI\Activitys\QuestionAddActivity.cs" />
@@ -258,6 +272,7 @@
     <Compile Include="UI\Activitys\SplashActivity.cs" />
     <Compile Include="UI\Activitys\BlogActivity.cs" />
     <Compile Include="UI\Adapters\ArticleCommentsAdapter.cs" />
+    <Compile Include="UI\Adapters\SearchAdapter.cs" />
     <Compile Include="UI\Adapters\BookmarksAdapter.cs" />
     <Compile Include="UI\Adapters\PhotoAdapter.cs" />
     <Compile Include="UI\Adapters\ArticlesAdapter.cs" />
@@ -268,6 +283,7 @@
     <Compile Include="UI\Adapters\NewsAdapter.cs" />
     <Compile Include="UI\Adapters\NewsCommentsAdapter.cs" />
     <Compile Include="UI\Adapters\QuestionsTabsAdapter.cs" />
+    <Compile Include="UI\Adapters\SearchTabsAdapter.cs" />
     <Compile Include="UI\Adapters\StatusAdapter.cs" />
     <Compile Include="UI\Adapters\StatusCommentsAdapter.cs" />
     <Compile Include="UI\Adapters\StatusTabsAdapter.cs" />
@@ -275,6 +291,7 @@
     <Compile Include="UI\Adapters\ArticlesTabsAdapter.cs" />
     <Compile Include="UI\Behaviors\BottomBehavior.cs" />
     <Compile Include="UI\Behaviors\ScrollDirection.cs" />
+    <Compile Include="UI\Fragments\SearchColumnFragment.cs" />
     <Compile Include="UI\Fragments\BookmarksFragment.cs" />
     <Compile Include="UI\Fragments\QuestionsColumnFragment.cs" />
     <Compile Include="UI\Fragments\QuestionsFragment.cs" />
@@ -288,10 +305,13 @@
     <Compile Include="UI\Listeners\IOnEditClickListener.cs" />
     <Compile Include="UI\Listeners\IOnDeleteClickListener.cs" />
     <Compile Include="UI\Listeners\IOnLoadMoreListener.cs" />
+    <Compile Include="UI\Listeners\IOnQueryChangeListener.cs" />
+    <Compile Include="UI\Listeners\IOnSearchViewListener.cs" />
     <Compile Include="UI\Shareds\BaseShared.cs" />
     <Compile Include="UI\Shareds\TokenShared.cs" />
     <Compile Include="UI\Shareds\SettingShared.cs" />
     <Compile Include="UI\Shareds\UserShared.cs" />
+    <Compile Include="UI\Views\ISearchColumnView.cs" />
     <Compile Include="UI\Views\IBlogView.cs" />
     <Compile Include="UI\Views\IBookmarkAddView.cs" />
     <Compile Include="UI\Views\IBookmarksView.cs" />
@@ -319,6 +339,7 @@
     <Compile Include="UI\Widgets\BodyWebViewClient.cs" />
     <Compile Include="UI\Widgets\CenteredImageSpan.cs" />
     <Compile Include="UI\Widgets\CircleTransform.cs" />
+    <Compile Include="UI\Widgets\CnblogsSearchView.cs" />
     <Compile Include="UI\Widgets\HackyViewPager.cs" />
     <Compile Include="UI\Widgets\RequestCode.cs" />
     <Compile Include="UI\Widgets\StatusBarCompat.cs" />
@@ -337,6 +358,7 @@
     <Compile Include="wxapi\WXEntryActivity.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -483,6 +505,18 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\blog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_search.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_search_item.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -738,7 +772,20 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\line.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\search_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\search.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\search_custom_cursor.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\close_24dp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -759,6 +806,7 @@
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Design.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Design.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v4.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v4.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Annotations.targets')" />
@@ -774,6 +822,7 @@
   <Import Project="..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Design.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Design.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v4.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v4.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
 		<Target Name="BeforeBuild">

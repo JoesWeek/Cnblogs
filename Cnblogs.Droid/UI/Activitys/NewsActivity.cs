@@ -111,7 +111,7 @@ namespace Cnblogs.Droid.UI.Activitys
         {
             if (news != null)
             {
-                sharesWidget.Open("https://news.cnblogs.com/n/" + news.Id + "/", news.Title,news.TopicIcon);
+                sharesWidget.Open("https://news.cnblogs.com/n/" + news.Id + "/", news.Title, news.TopicIcon);
             }
             return true;
         }
@@ -131,36 +131,39 @@ namespace Cnblogs.Droid.UI.Activitys
         }
         public void GetClientNewsSuccess(NewsModel model)
         {
-            news = model;
-            toolbar.Title = model.Title;
-            txtPostdate.Text = "发布于：" + DateTimeUtils.CommonTime(news.DateAdded);
-
-            if (news.DiggCount > 0)
-                txtDigg.Text = news.DiggCount.ToString();
-            if (news.ViewCount > 0)
-                txtRead.Text = news.ViewCount.ToString();
-            if (news.CommentCount > 0)
+            if (model != null)
             {
-                txtComments.Text = news.CommentCount.ToString();
-            }
+                news = model;
+                toolbar.Title = model.Title;
+                txtPostdate.Text = "发布于：" + DateTimeUtils.CommonTime(news.DateAdded);
+
+                if (news.DiggCount > 0)
+                    txtDigg.Text = news.DiggCount.ToString();
+                if (news.ViewCount > 0)
+                    txtRead.Text = news.ViewCount.ToString();
+                if (news.CommentCount > 0)
+                {
+                    txtComments.Text = news.CommentCount.ToString();
+                }
             (txtComments.Parent as FrameLayout).Click += delegate
              {
                  NewsCommentsActivity.Start(this, news.Id);
              };
 
-            (txtBookmark.Parent as FrameLayout).Click += delegate
-            {
-                var linkurl = "https://news.cnblogs.com/n/" + news.Id + "/";
-                var title = news.Title + "_IT新闻_博客园";
-                BookmarkAddActivity.Start(this, linkurl, title, true);
-            };
-            if (news.Body == null || news.Body == "")
-            {
-                OnRefresh();
-            }
-            else
-            {
-                GetServiceNewsSuccess(model);
+                (txtBookmark.Parent as FrameLayout).Click += delegate
+                {
+                    var linkurl = "https://news.cnblogs.com/n/" + news.Id + "/";
+                    var title = news.Title + "_IT新闻_博客园";
+                    BookmarkAddActivity.Start(this, linkurl, title, true);
+                };
+                if (news.Body == null || news.Body == "")
+                {
+                    OnRefresh();
+                }
+                else
+                {
+                    GetServiceNewsSuccess(model);
+                }
             }
         }
 
@@ -175,21 +178,24 @@ namespace Cnblogs.Droid.UI.Activitys
 
         public void GetServiceNewsSuccess(NewsModel model)
         {
-            handler.Post(() =>
+            if (model != null)
             {
-                if (swipeRefreshLayout.Refreshing)
+                handler.Post(() =>
                 {
-                    swipeRefreshLayout.Refreshing = false;
-                }
-                news = model;
-                if (swipeRefreshLayout.Refreshing)
-                {
-                    swipeRefreshLayout.Refreshing = false;
-                }
-                var content = HtmlUtils.ReadHtml(Assets);
-                var body = HtmlUtils.ReplaceHtml(model.Body).Trim('"');
-                txtBody.LoadDataWithBaseURL("file:///android_asset/", content.Replace("#title#", model.Title).Replace("#body#", body), "text/html", "utf-8", null);
-            });
+                    if (swipeRefreshLayout.Refreshing)
+                    {
+                        swipeRefreshLayout.Refreshing = false;
+                    }
+                    news = model;
+                    if (swipeRefreshLayout.Refreshing)
+                    {
+                        swipeRefreshLayout.Refreshing = false;
+                    }
+                    var content = HtmlUtils.ReadHtml(Assets);
+                    var body = HtmlUtils.ReplaceHtml(model.Body).Trim('"');
+                    txtBody.LoadDataWithBaseURL("file:///android_asset/", content.Replace("#title#", model.Title).Replace("#body#", body), "text/html", "utf-8", null);
+                });
+            }
         }
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {

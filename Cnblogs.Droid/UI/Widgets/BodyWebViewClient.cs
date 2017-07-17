@@ -67,9 +67,8 @@ namespace Cnblogs.Droid.UI.Widgets
         {
             try
             {
-                Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
-                intent.SetClassName("com.android.browser", "com.android.browser.BrowserActivity");
-                intent.AddFlags(ActivityFlags.NewTask);
+                Intent intent = new Intent(Intent.ActionView);
+                intent.SetData(Android.Net.Uri.Parse(url));
                 context.StartActivity(intent);
             }
             catch (Exception ex)

@@ -12,11 +12,23 @@ using Android.Widget;
 using System.IO;
 using Java.Util.Regex;
 using System.Text.RegularExpressions;
+using Android.Text;
 
 namespace Cnblogs.Droid.Utils
 {
     public class HtmlUtils
     {
+        public static ISpanned GetHtml(string html, FromHtmlOptions flags= FromHtmlOptions.ModeLegacy)
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
+            {
+                return Html.FromHtml(html, flags);
+            }
+            else
+            {
+                return Html.FromHtml(html);
+            }
+        }
         public static string ReadHtml(Android.Content.Res.AssetManager assets)
         {
             var body = "";

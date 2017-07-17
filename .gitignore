@@ -261,3 +261,6 @@ __pycache__/
 *.pyc
 /Cnblogs.Droid/Resources/values/Strings1.xml
 /Cnblogs.Droid/Resources/values/Strings1.xml
+/Cnblogs.Droid/Resources/layout/home.axml
+/Cnblogs.Droid/Resources/layout/home.axml
+/Cnblogs.Droid/Resources/menu/bottombar_menu.xml

@@ -16,16 +16,11 @@ using Cnblogs.Droid.UI.Shareds;
 using Cnblogs.Droid.UI.Widgets;
 using Cnblogs.Droid.Utils;
 using Com.Iflytek.Autoupdate;
-using Com.Umeng.Socialize;
-using Com.Umeng.Socialize.Bean;
-using Com.Umeng.Socialize.Utils;
 using Square.Picasso;
 using System;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 using FragmentTransaction = Android.Support.V4.App.FragmentTransaction;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
-using Com.Umeng.Socialize.Shareboard;
-using Com.Umeng.Socialize.Media;
 
 namespace Cnblogs.Droid
 {
@@ -183,25 +178,32 @@ namespace Cnblogs.Droid
         }
         public bool OnMenuItemClick(IMenuItem item)
         {
-            //是否登录
-            var user = UserShared.GetAccessToken(this);
-            if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
+            if (item.ItemId == Resource.Id.search)
             {
-                ShowLogin();
+                SearchActivity.Start(this);
             }
             else
             {
-                switch (lastSelecteID)
+                //是否登录
+                var user = UserShared.GetAccessToken(this);
+                if (user.access_token == "" || user.RefreshTime.AddSeconds(user.expires_in) < DateTime.Now)
                 {
-                    case Resource.Id.Statuses:
-                        StartActivityForResult(new Intent(this, typeof(StatusAddActivity)), (int)RequestCode.StatusAddCode);
-                        break;
-                    case Resource.Id.Question:
-                        StartActivityForResult(new Intent(this, typeof(QuestionAddActivity)), (int)RequestCode.QuestionAddCode);
-                        break;
-                    case Resource.Id.bookmarks:
-                        StartActivityForResult(new Intent(this, typeof(BookmarkAddActivity)), (int)RequestCode.BookmarkAddCode);
-                        break;
+                    ShowLogin();
+                }
+                else
+                {
+                    switch (lastSelecteID)
+                    {
+                        case Resource.Id.Statuses:
+                            StartActivityForResult(new Intent(this, typeof(StatusAddActivity)), (int)RequestCode.StatusAddCode);
+                            break;
+                        case Resource.Id.Question:
+                            StartActivityForResult(new Intent(this, typeof(QuestionAddActivity)), (int)RequestCode.QuestionAddCode);
+                            break;
+                        case Resource.Id.bookmarks:
+                            StartActivityForResult(new Intent(this, typeof(BookmarkAddActivity)), (int)RequestCode.BookmarkAddCode);
+                            break;
+                    }
                 }
             }
             return true;

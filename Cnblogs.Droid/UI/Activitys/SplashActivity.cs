@@ -3,13 +3,9 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Widget;
-using Cnblogs.Droid.Model;
 using Cnblogs.Droid.Presenter;
 using Cnblogs.Droid.UI.Shareds;
 using Cnblogs.Droid.UI.Views;
-using Cnblogs.Droid.Utils;
-using System;
-using System.Text;
 
 namespace Cnblogs.Droid.UI.Activitys
 {
@@ -34,12 +30,19 @@ namespace Cnblogs.Droid.UI.Activitys
             {
                 var basic = Square.OkHttp3.Credentials.Basic(Resources.GetString(Resource.String.ClientId), Resources.GetString(Resource.String.ClientSercret));
                 splashPresenter.GetAccessToken(TokenShared.GetAccessToken(this), basic);
+
+                var user = UserShared.GetAccessToken(this);
+                if (user.refresh_token != "")
+                {
+                    splashPresenter.UserRefreshToken(user, basic);
+                }
             }
             RunOnUiThread(() =>
             {
                 new Handler().PostDelayed(() =>
                 {
                     MainActivity.Start(this);
+                    //HomeActivity.Start(this);
                     ActivityCompat.FinishAfterTransition(this);
                 }, 3000);
             });

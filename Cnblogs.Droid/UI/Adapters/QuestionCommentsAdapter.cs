@@ -24,7 +24,7 @@ namespace Cnblogs.Droid.UI.Adapters
             var itemview = baseHolder.GetConvertView();
             itemview.Tag = model.CommentID;
             (baseHolder.GetView(Resource.Id.txtDateAdded) as TextView).Text = DateTimeUtils.CommonTime(Convert.ToDateTime(model.DateAdded));
-            (baseHolder.GetView(Resource.Id.txtContent) as TextView).SetText(Html.FromHtml(model.Content), TextView.BufferType.Spannable);
+            (baseHolder.GetView(Resource.Id.txtContent) as TextView).SetText(HtmlUtils.GetHtml(model.Content), TextView.BufferType.Spannable);
             var imgUserUrl = (baseHolder.GetView(Resource.Id.imgIconName) as ImageView);
             var imgDelete = (baseHolder.GetView(Resource.Id.imgDelete) as ImageButton);
             (baseHolder.GetView(Resource.Id.progressBar) as ProgressBar).Visibility = ViewStates.Gone;
@@ -43,7 +43,7 @@ namespace Cnblogs.Droid.UI.Adapters
             }
             if (model.PostUserInfo != null && model.PostUserInfo.UserID > 0)
             {
-                (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = Html.FromHtml(model.PostUserInfo.UserName).ToString();
+                (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = HtmlUtils.GetHtml(model.PostUserInfo.UserName).ToString();
                 (baseHolder.GetView(Resource.Id.txtScore) as TextView).Text = HtmlUtils.GetScoreName(model.PostUserInfo.QScore) + " ¡¤ " + model.PostUserInfo.QScore + "Ô°¶¹";
                 try
                 {

@@ -27,7 +27,7 @@ namespace Cnblogs.Droid.UI.Adapters
             linearLayout.Tag = model.AnswerID;
             linearLayout.SetOnClickListener(this);
             (baseHolder.GetView(Resource.Id.txtDateAdded) as TextView).Text = DateTimeUtils.CommonTime(Convert.ToDateTime(model.DateAdded));
-            (baseHolder.GetView(Resource.Id.txtContent) as TextView).SetText(Html.FromHtml(model.Answer), TextView.BufferType.Spannable);
+            (baseHolder.GetView(Resource.Id.txtContent) as TextView).SetText(HtmlUtils.GetHtml(model.Answer), TextView.BufferType.Spannable);
             (baseHolder.GetView(Resource.Id.progressBar) as ProgressBar).Visibility = ViewStates.Gone;
             var imgUserUrl = (baseHolder.GetView(Resource.Id.imgIconName) as ImageView);
             var imgDelete = (baseHolder.GetView(Resource.Id.imgDelete) as ImageButton);
@@ -61,7 +61,7 @@ namespace Cnblogs.Droid.UI.Adapters
             }
             if (model.AnswerUserInfo != null && model.AnswerUserInfo.UserID > 0)
             {
-                (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = Html.FromHtml(model.AnswerUserInfo.UserName).ToString();
+                (baseHolder.GetView(Resource.Id.txtUserName) as TextView).Text = HtmlUtils.GetHtml(model.AnswerUserInfo.UserName).ToString();
                 (baseHolder.GetView(Resource.Id.txtScore) as TextView).Text = HtmlUtils.GetScoreName(model.AnswerUserInfo.QScore) + " ¡¤ " + model.AnswerUserInfo.QScore + "Ô°¶¹ ¡¤ ";
                 try
                 {

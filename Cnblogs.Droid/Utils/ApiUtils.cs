@@ -64,6 +64,7 @@ namespace Cnblogs.Droid.Utils
         public const string BookmarkEdit = Host + Api + "/bookmarks/{0}";
         public const string BookmarkAdd = Host + Api + "/Bookmarks";
 
+        public const string Search = Host + Api + "/ZzkDocuments/{0}?keyWords={1}&pageIndex={2}&startDate=&endDate=&viewTimesAtLeast=0";
 
     }
 }

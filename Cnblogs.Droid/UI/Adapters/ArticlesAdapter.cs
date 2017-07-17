@@ -30,7 +30,7 @@ namespace Cnblogs.Droid.UI.Adapters
             (baseHolder.GetView(Resource.Id.txtCommentCount) as TextView).Text = model.CommentCount + " " + context.Resources.GetString(Resource.String.comment);
             if (model.Author != null)
             {
-                (baseHolder.GetView(Resource.Id.txtAuthor) as TextView).Text = Html.FromHtml(model.Author).ToString();
+                (baseHolder.GetView(Resource.Id.txtAuthor) as TextView).Text = HtmlUtils.GetHtml(model.Author).ToString();
                 try
                 {
                     Picasso.With(context)
