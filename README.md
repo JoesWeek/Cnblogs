@@ -8,7 +8,7 @@
 
 ## 下载
 
-[Download](com.android.cnblogs.apk)
+[酷安应用商店](http://www.coolapk.com/apk/com.android.cnblogs)
 
 ## 支持功能
 
@@ -25,6 +25,8 @@
 - 支持查看，发布博问，发表回答和评论
 
 - 支持分享博文，新闻，知识库，博问到微信和新浪微博
+
+- 支持搜索功能
 
 
 ## 截图
@@ -43,6 +45,8 @@
 - [Square.Picasso](https://github.com/mattleibow/square-bindings)
 
 ## 联系我
+
+QQ群： [181050206](http://shang.qq.com/wpa/qunwpa?idkey=5c281d37638467fb0f411484dcd513b89ba82b58decb8518cc2523b95232dd9b)
 
 JoesWeek
 
