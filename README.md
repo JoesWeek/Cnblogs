@@ -44,6 +44,8 @@
 
 ## 联系我
 
+QQ群：- [181050206](http://shang.qq.com/wpa/qunwpa?idkey=5c281d37638467fb0f411484dcd513b89ba82b58decb8518cc2523b95232dd9b)
+
 JoesWeek
 
 [476920650@qq.com](mailto:476920650@qq.com)
