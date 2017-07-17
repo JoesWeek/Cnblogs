@@ -8,7 +8,7 @@
 
 ## 下载
 
-[Download](com.android.cnblogs.apk)
+[酷安应用商店](http://www.coolapk.com/apk/com.android.cnblogs)
 
 ## 支持功能
 
