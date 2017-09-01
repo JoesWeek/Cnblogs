@@ -65,7 +65,7 @@ namespace Cnblogs.Droid.UI.Fragments
             notloginView = this.Activity.LayoutInflater.Inflate(Resource.Layout.nologin_view, (ViewGroup)recyclerView.Parent, false);
             notloginView.Click += delegate (object sender, EventArgs e)
             {
-                StartActivityForResult(new Intent(this.Activity, typeof(LoginActivity)), (int)RequestCode.LoginCode);
+                StartActivityForResult(new Intent(this.Activity, typeof(AuthorizeActivity)), (int)RequestCode.LoginCode);
             };
             notDataView = this.Activity.LayoutInflater.Inflate(Resource.Layout.empty_view, (ViewGroup)recyclerView.Parent, false);
             notDataView.Click += delegate (object sender, EventArgs e)
@@ -315,7 +315,7 @@ namespace Cnblogs.Droid.UI.Fragments
             dialog.SetMessage(Resources.GetString(Resource.String.need_login_tip));
             dialog.SetPositiveButton(Resources.GetString(Resource.String.confirm), delegate
             {
-                StartActivityForResult(new Intent(this.Activity, typeof(LoginActivity)), (int)RequestCode.LoginCode);
+                StartActivityForResult(new Intent(this.Activity, typeof(AuthorizeActivity)), (int)RequestCode.LoginCode);
                 dialog.Dispose();
             });
             dialog.SetNegativeButton(Resources.GetString(Resource.String.cancel), delegate

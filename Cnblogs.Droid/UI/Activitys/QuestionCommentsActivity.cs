@@ -284,7 +284,7 @@ namespace Cnblogs.Droid.UI.Activitys
             dialog.SetMessage(Resources.GetString(Resource.String.need_login_tip));
             dialog.SetPositiveButton(Resources.GetString(Resource.String.confirm), delegate
             {
-                StartActivityForResult(new Intent(this, typeof(LoginActivity)), (int)RequestCode.LoginCode);
+                StartActivityForResult(new Intent(this, typeof(AuthorizeActivity)), (int)RequestCode.LoginCode);
                 dialog.Dispose();
             });
             dialog.SetNegativeButton(Resources.GetString(Resource.String.cancel), delegate

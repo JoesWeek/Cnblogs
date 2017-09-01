@@ -1,21 +1,12 @@
-﻿using Cnblogs.Droid.Model;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cnblogs.Droid.Utils
+﻿namespace Cnblogs.Droid.Utils
 {
     public class ApiUtils
     {
         public const string Host = "https://api.cnblogs.com";
         public const string Api = "/api";
-        public const string Token = Host + "/token";
-
+        public const string Token = "https://oauth.cnblogs.com/connect/token";
+        public const string Authorize = "https://oauth.cnblogs.com/connect/authorize?client_id={0}&scope=openid profile CnBlogsApi offline_access&response_type=code id_token&redirect_uri=https://oauth.cnblogs.com/auth/callback&state=cnblogs.com&nonce=cnblogs.com";
+        
         public const string Users = Host + Api + "/Users";
 
         public const string BlogApp = Host + Api + "/blogs/{0}";

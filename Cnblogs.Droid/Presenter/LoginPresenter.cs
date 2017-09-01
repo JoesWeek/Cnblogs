@@ -4,6 +4,7 @@ using Cnblogs.Droid.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cnblogs.Droid.Presenter
 {
@@ -14,7 +15,7 @@ namespace Cnblogs.Droid.Presenter
         {
             this.loginView = loginView;
         }
-        public void Login(AccessToken token, string basic, string account, string password)
+        public async Task LoginAsync(AccessToken token, string basic, string account, string password)
         {
             try
             {
@@ -63,6 +64,45 @@ namespace Cnblogs.Droid.Presenter
               {
                   loginView.LoginFail(ex.Message);
               });
+            }
+            catch (Exception ex)
+            {
+                loginView.LoginFail(ex.Message);
+            }
+        }
+
+        public void Login(AccessToken token, string content)
+        {
+            try
+            {
+                OkHttpUtils.Instance(token).Post(ApiUtils.Token, content, "application/x-www-form-urlencoded", async (call, response) =>
+                {
+                    var code = response.Code();
+                    var body = await response.Body().StringAsync();
+                    if (code == (int)System.Net.HttpStatusCode.OK)
+                    {
+                        token = JsonConvert.DeserializeObject<AccessToken>(body);
+                        token.RefreshTime = DateTime.Now;
+                        var result = await OkHttpUtils.Instance(token).GetAsyn(ApiUtils.Users);
+                        if (result.IsError)
+                        {
+                            loginView.LoginFail(result.Message);
+                        }
+                        else
+                        {
+                            var user = JsonConvert.DeserializeObject<UserModel>(result.Message);
+                            await SQLiteUtils.Instance().UpdateUser(user);
+                            loginView.LoginSuccess(token, user);
+                        }
+                    }
+                    else
+                    {
+                        loginView.LoginFail("»ñÈ¡tokenÊ§°Ü");
+                    }
+                }, (call, ex) =>
+                {
+                    loginView.LoginFail(ex.Message);
+                });
             }
             catch (Exception ex)
             {

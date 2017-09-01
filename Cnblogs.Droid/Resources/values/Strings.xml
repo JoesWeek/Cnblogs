@@ -4,7 +4,6 @@
   <string name="survey_email"></string>
   <string name="ClientId"></string>
   <string name="ClientSercret"></string>
-  <string name="PublicKey"></string>
 
   <string name="AppName">博客园</string>
   <string name="AppTitle">—  代码改变世界  —</string>

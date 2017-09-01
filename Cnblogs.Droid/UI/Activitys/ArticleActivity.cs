@@ -58,7 +58,7 @@ namespace Cnblogs.Droid.UI.Activitys
             Id = Intent.GetIntExtra("id", 0);
             articlePresenter = new ArticlePresenter(this);
             handler = new Handler();
-
+            
             StatusBarCompat.SetOrdinaryToolBar(this);
             toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             toolbar.SetNavigationIcon(Resource.Drawable.back_24dp);

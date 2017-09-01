@@ -12,8 +12,6 @@
   <style name="AppTheme" parent="@style/BaseAppTheme">
     <item name="android:windowTranslucentStatus">true</item>
   </style>
-  <style name="SplashTheme" parent="@style/BaseAppTheme">
-  </style>
   <style name="PhotoTheme" parent="@style/BaseAppTheme">
     <item name="colorPrimaryDark">@color/dark</item>
   </style>
@@ -22,9 +20,6 @@
   </style>
   <style name="SwitchTheme" parent="@style/BaseAppTheme">
     <item name="colorAccent">@color/primary</item>
-  </style>
-  <style name="LaunchStyle" parent="AppTheme">
-    <item name="android:windowBackground">@drawable/shape_launch</item>
   </style>
   <style name="LineStyle">
     <item name="android:layout_width">match_parent</item>
@@ -40,5 +35,11 @@
   </style>
   <style name="SearchStyle" parent="@style/BaseAppTheme">
     <item name="colorAccent">@color/gainsboro</item>
+  </style>
+  <style name="LaunchStyle" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowBackground">@drawable/shape_launch</item>
   </style>
 </resources>

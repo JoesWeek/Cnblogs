@@ -75,12 +75,19 @@ namespace Cnblogs.Droid.Utils
                 builder.Add(item.Key, item.Value);
             }
             var body = builder.Build();
-            Request request = new Request.Builder().Url(url).Post(body).Build();
+            Request request = new Request.Builder().AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8").Url(url).Post(body).Build();
             okHttpClient.NewCall(request).Enqueue(onResponse, onFailure);
         }
         public void Post(string url, string content, Action<ICall, Response> onResponse, Action<ICall, Java.IO.IOException> onFailure)
         {
             var body = RequestBody.Create(MediaType.Parse("text/plain"), Encoding.UTF8.GetBytes(content));
+
+            Request request = new Request.Builder().Url(url).Post(body).Build();
+            okHttpClient.NewCall(request).Enqueue(onResponse, onFailure);
+        }
+        public void Post(string url, string content,string mediaType, Action<ICall, Response> onResponse, Action<ICall, Java.IO.IOException> onFailure)
+        {
+            var body = RequestBody.Create(MediaType.Parse(mediaType), Encoding.UTF8.GetBytes(content));
 
             Request request = new Request.Builder().Url(url).Post(body).Build();
             okHttpClient.NewCall(request).Enqueue(onResponse, onFailure);

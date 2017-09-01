@@ -56,7 +56,7 @@ namespace Cnblogs.Droid.UI.Widgets
             searchLayout = FindViewById(Resource.Id.search_layout);
 
             searchTopBar = (RelativeLayout)searchLayout.FindViewById(Resource.Id.search_top_bar);
-            suggestionsListView = (ListView)searchLayout.FindViewById(Resource.Id.suggestion_list);
+            //suggestionsListView = (ListView)searchLayout.FindViewById(Resource.Id.suggestion_list);
             searchSrcTextView = (EditText)searchLayout.FindViewById(Resource.Id.searchTextView);
             backBtn = (ImageButton)searchLayout.FindViewById(Resource.Id.action_up_btn);
             emptyBtn = (ImageButton)searchLayout.FindViewById(Resource.Id.action_empty_btn);

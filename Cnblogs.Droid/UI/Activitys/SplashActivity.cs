@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V4.App;
@@ -42,9 +43,8 @@ namespace Cnblogs.Droid.UI.Activitys
                 new Handler().PostDelayed(() =>
                 {
                     MainActivity.Start(this);
-                    //HomeActivity.Start(this);
                     ActivityCompat.FinishAfterTransition(this);
-                }, 3000);
+                }, 1000);
             });
         }
     }

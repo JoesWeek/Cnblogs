@@ -67,7 +67,8 @@ namespace Cnblogs.Droid.UI.Activitys
                         Toast.MakeText(this, Resources.GetString(Resource.String.need_password), ToastLength.Short).Show();
                         return;
                     }
-                    var publicKey = Resources.GetString(Resource.String.PublicKey);
+                    //var publicKey = Resources.GetString(Resource.String.PublicKey);
+                    var publicKey = "";
                     if (publicKey == "")
                     {
                         Toast.MakeText(this, Resources.GetString(Resource.String.publicKey_error), ToastLength.Short).Show();
@@ -79,7 +80,7 @@ namespace Cnblogs.Droid.UI.Activitys
 
                     var basic = Square.OkHttp3.Credentials.Basic(Resources.GetString(Resource.String.ClientId), Resources.GetString(Resource.String.ClientSercret));
 
-                    loginPresenter.Login(TokenShared.GetAccessToken(this), basic, rsaUtils.Encrypt(account), rsaUtils.Encrypt(password));
+                    loginPresenter.LoginAsync(TokenShared.GetAccessToken(this), basic, rsaUtils.Encrypt(account), rsaUtils.Encrypt(password));
                     break;
                 default:
                     InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
