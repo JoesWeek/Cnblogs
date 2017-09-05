@@ -5,80 +5,81 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="?attr/selectableItemBackgroundGeneral">
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:padding="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-      <ImageView
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          android:id="@+id/imgIconName" />
-      <RelativeLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="center_vertical"
-          android:id="@+id/layoutAuthor"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="5dp">
-        <TextView
-            android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtUserName"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imgIconName" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:id="@+id/layoutAuthor"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtUserName"
+                    android:textSize="14sp"
+                    android:textColor="@color/title_color"
+                    android:singleLine="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="2dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtScore"
+                    android:textSize="12sp"
+                    android:textColor="@color/subtitle_color"
+                    android:layout_below="@+id/txtUserName" />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDateAdded"
+                android:textSize="12sp"
+                android:textColor="@color/subtitle_color"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtContent"
             android:textSize="14sp"
             android:textColor="@color/title_color"
-            android:singleLine="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="2dp" />
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtScore"
-            android:textSize="12sp"
-            android:textColor="@color/subtitle_color"
-            android:layout_below="@+id/txtUserName" />
-      </RelativeLayout>
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:id="@+id/txtDateAdded"
-          android:textSize="12sp"
-          android:textColor="@color/subtitle_color"
-          android:layout_gravity="center_vertical" />
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="5dp">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/progressBarStyleSmall"
+                android:visibility="gone" />
+            <ImageButton
+                android:id="@+id/imgDelete"
+                android:background="@drawable/delete_18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtContent"
-        android:textSize="14sp"
-        android:textColor="@color/title_color"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical|right"
-        android:layout_marginRight="5dp">
-      <ProgressBar
-          android:id="@+id/progressBar"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          style="?android:attr/progressBarStyleSmall"
-          android:visibility="gone" />
-      <ImageButton
-          android:id="@+id/imgDelete"
-          android:background="@drawable/delete_18dp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:visibility="gone" />
-    </LinearLayout>
-  </LinearLayout>
-  <View style="@style/LineStyle" />
+    <View
+        style="@style/LineStyle" />
 </LinearLayout>

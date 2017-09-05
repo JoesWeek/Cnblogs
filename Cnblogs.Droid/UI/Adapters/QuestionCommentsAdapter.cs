@@ -24,7 +24,7 @@ namespace Cnblogs.Droid.UI.Adapters
             var itemview = baseHolder.GetConvertView();
             itemview.Tag = model.CommentID;
             (baseHolder.GetView(Resource.Id.txtDateAdded) as TextView).Text = DateTimeUtils.CommonTime(Convert.ToDateTime(model.DateAdded));
-            (baseHolder.GetView(Resource.Id.txtContent) as TextView).SetText(HtmlUtils.GetHtml(model.Content), TextView.BufferType.Spannable);
+            (baseHolder.GetView(Resource.Id.txtContent) as TextView).SetText(HtmlUtils.GetHtml(model.ConvertedContent==null? model.Content: model.ConvertedContent), TextView.BufferType.Spannable);
             var imgUserUrl = (baseHolder.GetView(Resource.Id.imgIconName) as ImageView);
             var imgDelete = (baseHolder.GetView(Resource.Id.imgDelete) as ImageButton);
             (baseHolder.GetView(Resource.Id.progressBar) as ProgressBar).Visibility = ViewStates.Gone;

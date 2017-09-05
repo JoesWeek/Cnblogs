@@ -6,6 +6,10 @@
 
 博客园Open Api需要申请调用权限，Open Api基于OAuth进行验证，感谢[博客园](http://www.cnblogs.com/)官方提供的支持
 
+# 关于Fork
+
+Fork本项目之前需要先下载[XamarinSDK](https://github.com/JoesWeek/XamarinSDK)项目,生成后添加引用,要不然会报找不到相关引用的错误
+
 ## 下载
 
 [酷安应用商店](http://www.coolapk.com/apk/com.android.cnblogs)
