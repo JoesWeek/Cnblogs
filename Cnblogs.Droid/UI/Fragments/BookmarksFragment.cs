@@ -236,7 +236,7 @@ namespace Cnblogs.Droid.UI.Fragments
                 var child = recyclerView.FindViewWithTag(item.WzLinkId.ToString());
                 child.FindViewById(Resource.Id.imgDelete).Visibility = ViewStates.Gone;
                 child.FindViewById(Resource.Id.progressBar).Visibility = ViewStates.Visible;
-                bookmarksPresenter.DeleteBookmark(user, item.WzLinkId);
+                bookmarksPresenter.DeleteBookmarkAsync(user, item.WzLinkId);
             }
         }
         public void DeleteBookmarkFail(int id, string msg)

@@ -403,13 +403,13 @@ namespace Cnblogs.Droid
             {
                 case Resource.Id.headerAvatar:
                     var token = UserShared.GetAccessToken(this);
-                    if (token == null || token.access_token == "")
+                    var user = await SQLiteUtils.Instance().QueryUser();
+                    if (user == null || token == null || token.access_token == "")
                     {
                         StartActivityForResult(new Intent(this, typeof(AuthorizeActivity)), (int)RequestCode.LoginCode);
                     }
                     else
                     {
-                        var user = await SQLiteUtils.Instance().QueryUser();
                         if (string.IsNullOrEmpty(user.BlogApp))
                         {
                             Toast.MakeText(this, "未开通博客", ToastLength.Short).Show();
@@ -446,9 +446,9 @@ namespace Cnblogs.Droid
         }
         public async void UpdateUserView()
         {
-            if (LoginUtils.Instance(this).GetLoginStatus())
+            var user = await LoginUtils.Instance(this).GetUser();
+            if (LoginUtils.Instance(this).GetLoginStatus() && user != null)
             {
-                var user = await LoginUtils.Instance(this).GetUser();
                 Author.Text = user.DisplayName;
                 Seniority.Text = Resources.GetString(Resource.String.seniority) + "：" + user.Seniority;
                 txtLogout.Visibility = ViewStates.Visible;

@@ -117,11 +117,20 @@ namespace Cnblogs.Droid.Utils
             public async Task DeleteUserAll()
             {
                 var user = await QueryUser();
-                await DeleteAsync(user).ContinueWith(async (index) =>
+                if (user != null)
                 {
-                    await DeleteStatusByUser(user.UserId);
-                    await DeleteBookmarks();
-                });
+                    var books = await Table<Model.BookmarksModel>().ToListAsync();
+                    if (books != null && books.Count > 0)
+                    {
+                        books.ForEach(async b => await DeleteAsync(b));
+                    }
+                    var status = await Table<Model.StatusModel>().Where(a => a.UserGuid == user.UserId).ToListAsync();
+                    if (status != null && status.Count > 0)
+                    {
+                        status.ForEach(async s => await DeleteAsync(s));
+                    }
+                    await DeleteAsync(user);
+                }
             }
             #endregion
 
@@ -354,7 +363,9 @@ namespace Cnblogs.Droid.Utils
             }
             public async Task<int> DeleteBookmark(int id)
             {
-                return await DeleteAsync(QueryBookmark(id));
+                var item = await QueryBookmark(id);
+                var count = await DeleteAsync(item);
+                return count;
             }
             public async Task DeleteBookmarks()
             {

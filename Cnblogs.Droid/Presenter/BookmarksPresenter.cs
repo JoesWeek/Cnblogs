@@ -42,11 +42,12 @@ namespace Cnblogs.Droid.Presenter
         {
             bookmarksView.GetClientBookmarksSuccess(await SQLiteUtils.Instance().QueryBookmarks(pageSize));
         }
-        public void DeleteBookmark(AccessToken token, int id)
+        public async void DeleteBookmarkAsync(AccessToken token, int id)
         {
             try
             {
                 var url = string.Format(ApiUtils.BookmarkDelete, id);
+                await SQLiteUtils.Instance().DeleteBookmark(id);
 
                 OkHttpUtils.Instance(token).Delete(url, async (call, response) =>
                 {
@@ -54,7 +55,6 @@ namespace Cnblogs.Droid.Presenter
                     var body = await response.Body().StringAsync();
                     if (code == (int)System.Net.HttpStatusCode.OK)
                     {
-                        await SQLiteUtils.Instance().DeleteBookmark(id);
                         bookmarksView.DeleteBookmarkSuccess(id);
                     }
                     else
