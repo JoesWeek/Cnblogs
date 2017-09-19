@@ -51,13 +51,24 @@ namespace Cnblogs.Droid.UI.Activitys
             dialog = new ProgressDialog(this);
             dialog.SetCancelable(false);
             dialog.SetMessage("正在获取token");
-
+            
             loginView = FindViewById<WebView>(Resource.Id.loginView);
             loginView.Settings.JavaScriptEnabled = true;
             loginView.Settings.SetSupportZoom(true);
             loginView.Settings.BuiltInZoomControls = true;
+            loginView.Settings.CacheMode = CacheModes.NoCache;
+            loginView.ClearHistory();
+            loginView.ClearFormData();
+            loginView.ClearCache(true);            
             loginView.SetWebChromeClient(new LoginWebChromeClient(progressBar));
             loginView.SetWebViewClient(new LoginWebViewClient(this));
+
+            CookieSyncManager cookieSyncManager = CookieSyncManager.CreateInstance(loginView.Context);
+            CookieManager cookieManager = CookieManager.Instance;
+            cookieManager.SetAcceptCookie(true);
+            cookieManager.RemoveSessionCookie();
+            cookieManager.RemoveAllCookie();
+            
             loginView.LoadUrl(string.Format(ApiUtils.Authorize, Resources.GetString(Resource.String.ClientId)) + new Random().Next(1000, 9999));
         }
 

@@ -1,6 +1,6 @@
-# Cnblogs
+# 介绍
 
-[博客园](http://www.cnblogs.com/)第三方Android客户端，Xamarin App，Material Design风格
+一款优雅的博客园Android客户端，Xamarin App，Material Design风格。如有意见反馈或bug提交，请加QQ群(181050206)交流.
 
 # AccessToken
 
@@ -39,14 +39,6 @@ Fork本项目之前需要先下载[XamarinSDK](https://github.com/JoesWeek/Xamar
 ![screenshots](screenshots/Screenshot1.png)
 ![screenshots](screenshots/Screenshot2.png)
 ![screenshots](screenshots/Screenshot3.png)
-
-## 依赖
-
-- [sqlite-net-pcl](https://github.com/praeclarum/sqlite-net)
-
-- [Square.OkHttp3](https://github.com/mattleibow/square-bindings)
-
-- [Square.Picasso](https://github.com/mattleibow/square-bindings)
 
 ## 联系我
 
