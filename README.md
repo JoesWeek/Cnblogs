@@ -4,7 +4,7 @@
 
 # AccessToken
 
-博客园Open Api需要申请调用权限，Open Api基于OAuth进行验证，感谢[博客园](http://www.cnblogs.com/)官方提供的支持
+博客园Api需要申请调用权限,[申请地址](https://oauth.cnblogs.com/)，感谢[博客园](http://www.cnblogs.com/)官方提供的支持
 
 # 关于Fork
 
